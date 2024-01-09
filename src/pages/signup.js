@@ -47,39 +47,37 @@ export default function Signup() {
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <Label size='large' weight='bold'>Username</Label>
-                <Input 
-                    size="large"
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    value={username}
-                    onChange={handleChangeUsername}
-                />
-                <Label size='large' weight='bold'>Password</Label>
-                <Input 
-                    size="large"
-                    type="password" 
-                    name="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={handleChangePassword}
-                />
-                <Input 
-                    size="large"
-                    type="password" 
-                    name="password1"
-                    placeholder="Re-type Password"
-                    value={password1}
-                    onChange={handleChangePassword1}
-                />
-                <input 
-                    type="submit"
-                    value="Signup"
-                />
-            </form>
-        </>
+        <form onSubmit={handleSubmit}>
+            <Label size='large' weight='bold'>Username</Label>
+            <Input 
+                size="large"
+                type="text"
+                name="username"
+                placeholder="Username"
+                value={username}
+                onChange={handleChangeUsername}
+            />
+            <Label size='large' weight='bold'>Password</Label>
+            <Input 
+                size="large"
+                type="password" 
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={handleChangePassword}
+            />
+            <Input 
+                size="large"
+                type="password" 
+                name="password1"
+                placeholder="Re-type Password"
+                value={password1}
+                onChange={handleChangePassword1}
+            />
+            <input 
+                type="submit"
+                value="Signup"
+            />
+        </form>
     )
 }

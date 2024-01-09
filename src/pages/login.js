@@ -1,10 +1,20 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { Label,Input } from "@fluentui/react-components";
+import { useRouter } from "next/router"
+import { AuthContext } from '../components/AuthProvider'
+import { login } from "../services/auth-service"
 
-// sign up -static component
 export default function Login() {
+    const router = useRouter()
+
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    //before this have setToken from AuthContext
+
+    const { setToken } = useContext(AuthContext);
+
+    const handleNavigation = (route) => {
+        router.push(route)
+    }
 
     const handleChangeUsername = (e) => {
         setUsername(e.target.value)
@@ -16,37 +26,43 @@ export default function Login() {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        if(password && username) {
+        if(username && password) {
             const payload = {
                 username,
-                password
+                password,
             }
             console.log(payload)
-            //before this have token
-        }else {
+            const token = await login(payload)
+            setToken(token)
+            handleNavigation("/")
+        } else {
             alert("password does not match or missing username")
         }
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            <input
+            <Label size='large' weight='bold'>Username</Label>
+            <Input 
+                size="large"
                 type="text"
                 name="username"
                 placeholder="Username"
                 value={username}
                 onChange={handleChangeUsername}
             />
-            <input
-                type="password"
+            <Label size='large' weight='bold'>Password</Label>
+            <Input 
+                size="large"
+                type="password" 
                 name="password"
                 placeholder="Password"
                 value={password}
                 onChange={handleChangePassword}
             />
-            <input
+            <input 
                 type="submit"
-                value="Login"
+                value="Signup"
             />
         </form>
     )
