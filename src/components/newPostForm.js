@@ -1,31 +1,43 @@
 import { useState, useContext, useCallback } from 'react';
 import { AuthContext } from '../components/AuthProvider';
-import { Label, Input, Textarea, SpinButton, Button, Select, MessageBar, MessageBarBody, MessageBarTitle, MessageBarActions } from "@fluentui/react-components";
+import { Label, Input, Textarea, SpinButton, Button, Select, MessageBar, MessageBarBody, MessageBarTitle, MessageBarActions, DismissRegular } from "@fluentui/react-components";
 import { useRouter } from "next/router";
 import UserHeader from "@/components/userHeader"
 import { createPhoto } from '@/services/photo-service';
+import { createPost } from '@/services/post-service';
 
 export default function NewPostForm() {
     const { user, getToken } = useContext(AuthContext);
     const router = useRouter();
 
     const [title, setTitle] = useState("")
-    const [type, setType] = useState("Outwear")
+    const [type, setType] = useState("Outerwear")
     const [review, setReview] = useState("")
     const [style, setStyle] = useState("Feminine")
     const [price, setPrice] = useState(null | 0)
     const [photo, setPhoto] = useState()
-
-    const [error, setError] = useState("")
     
+    const handleNavigation = (route) => {
+        router.push(route)
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const token = getToken()
-        const id = await createPhoto(photo, token)
-        if (!id) {
-            setError("Error in uploading photo")
+        const photoId = await createPhoto(photo, token)
+        const payload = {
+            title,
+            type,
+            review,
+            style,
+            price,
+            photo: [photoId],
         }
 
+        const response = await createPost(payload, token)
+        if (response.hasOwnProperty('_id')) {
+            handleNavigation("/")
+        }
     }
 
     const handleChangeTitle = (e) => {
@@ -61,25 +73,6 @@ export default function NewPostForm() {
 
     return (
         <div>
-            {error && (
-                <MessageBar key="error" intent="error">
-                    <MessageBarBody>
-                        <MessageBarTitle>Error: </MessageBarTitle>
-                        {error}
-                    </MessageBarBody>
-                    <MessageBarActions
-                        containerAction={
-                            <Button
-                            aria-label="dismiss"
-                            appearance="transparent"
-                            icon={<DismissRegular />}
-                            />
-                        }
-                        >
-                    </MessageBarActions>
-
-                </MessageBar>
-            )}
 
             {user ? (
                 <form onSubmit={handleSubmit}>
@@ -94,7 +87,7 @@ export default function NewPostForm() {
                     <div>
                         <Label>Apparel Type</Label>
                         <Select onChange={handleChangeType}>
-                            <option>Outwear</option>
+                            <option>Outerwear</option>
                             <option>Top</option>
                             <option>Pant</option>
                             <option>Skirt</option>

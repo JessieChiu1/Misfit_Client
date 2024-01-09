@@ -1,9 +1,10 @@
 // createPost
-export const createPost = async(payload) => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/post`, {
+export const createPost = async(payload, token) => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/post`, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload)
     })
@@ -13,7 +14,7 @@ export const createPost = async(payload) => {
 
 // get specific post
 export const getPost = async(id) => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/post/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/post/${id}`, {
         method: "GET",
 
     })
@@ -23,7 +24,7 @@ export const getPost = async(id) => {
 
 // query style - query string
 export const getPostByStyle = async(style) => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/post?style=${style}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/post?style=${style}`, {
         method: "GET",
     })
     const data = await response.json()
@@ -32,7 +33,7 @@ export const getPostByStyle = async(style) => {
 
 // get latest
 export const getLatestPost = async() => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/post/`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/post/`, {
         method: "GET",
     })
     const data = await response.json()
