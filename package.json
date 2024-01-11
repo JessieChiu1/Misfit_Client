@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fluentui/react-components": "^9.43.3",
+    "@fluentui/react-icons": "^2.0.224",
     "eslint": "8.55.0",
     "eslint-config-next": "14.0.3",
     "next": "14.0.3",

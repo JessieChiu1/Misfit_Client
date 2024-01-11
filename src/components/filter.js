@@ -1,11 +1,14 @@
-import { makeStyles, ToggleButton } from "@fluentui/react-components";
+import { makeStyles, ToggleButton, Label, shorthands } from "@fluentui/react-components";
 import { useRouter } from 'next/router';
 
 const useStyles = makeStyles({
     wrapper: {
-      display: "flex",
-      justifyContent: "space-evenly",
-    },
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-evenly",
+        ...shorthands.padding("20px"),
+    }
+
 });
 
 export default function Filter() {
@@ -19,13 +22,13 @@ export default function Filter() {
     return (
         <nav className={styles.wrapper}>
             <ToggleButton size="large" onClick={() => handleNavigation("/feminine")}>
-                Feminine
+                <Label size="large" weight="bold">Feminine</Label>
             </ToggleButton>
             <ToggleButton size="large" onClick={() => handleNavigation("/androgynous")}>
-                Androgynous
+                <Label size="large" weight="bold">Androgynous</Label>
             </ToggleButton>
             <ToggleButton size="large" onClick={() => handleNavigation("/masculine")}>
-                Masculine
+                <Label size="large" weight="bold">Masculine</Label>
             </ToggleButton>
         </nav>
     )

@@ -1,21 +1,22 @@
-import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Text, Body1, Image} from "@fluentui/react-components";
+import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Text, Body1, Image, Label, shorthands} from "@fluentui/react-components";
 
 const useStyles = makeStyles({
 	card: {
-	  width: "300px",
-	  maxWidth: "100%",
+		...shorthands.margin("20px"),
+	  	width: "500px",
+	  	maxWidth: "100%",
 	},
-  });
+})
 
 export default function PostCard({ post }) {
 	const styles = useStyles();
 
 	return (
-		<Card className={styles.card}>
+		<Card className={styles.card} size="large">
 			<CardHeader
 				header={
 					<Body1>
-						<Text>{post.title}</Text >
+						<Label size="large">{post.title}</Label >
 					</Body1>
 				}
 			/>

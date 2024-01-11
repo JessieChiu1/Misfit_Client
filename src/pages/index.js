@@ -5,9 +5,15 @@ import { makeStyles, shorthands, Spinner } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
 	container: {
-	  "> div": { ...shorthands.padding("20px") },
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+		minHeight: "100vh",
+		...shorthands.padding("20px"),
 	},
-  });
+})
+  
 
 export default function Home() {
 	const styles = useStyles();
@@ -16,15 +22,15 @@ export default function Home() {
 	return (
 		<div>
 			<Header/>
-			{allPost.length > 0 ? (
-				allPost.map(post => (
-					<PostCard key={post._id} post={post}/>
-				))
-			): (
-				<div className={styles.container}>
-					<Spinner size="large"/>
-				</div>
-			)}
+			<section className={styles.container}>
+				{allPost.length > 0 ? (
+					allPost.map((post) => (
+						<PostCard size="large" key={post._id} post={post}/>
+					))
+				) : (
+					<Spinner size="large" />
+				)}
+			</section>
 
 		</div>
 	)
