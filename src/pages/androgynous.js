@@ -9,25 +9,23 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Androgynous() {
+export default function Feminine() {
 	const styles = useStyles();
-	const { allPost:allAndroPost, setPost:setAndroPost} = usePost("Androgynous")
+	const { allPost:allAndroPost } = usePost("Androgynous")
 
 	return (
 		<div>
 			<Header/>
 
-			<Spinner/>
-
-			{/* {allAndroPost.length > 0 ? (
-				allAndroPost.map(post => {
+			{allAndroPost.length > 0 ? (
+				allAndroPost.map(post => (
 					<PostCard key={post._id} post={post}/>
-				})
+				))
 			): (
 				<div className={styles.container}>
 					<Spinner size="large"/>
 				</div>
-			)} */}
+			)}
 
 		</div>
 	)

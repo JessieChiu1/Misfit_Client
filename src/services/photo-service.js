@@ -12,6 +12,7 @@ export const createPhoto = async (photo, token) => {
         })
 
         const { id } = await response.json()
+        console.log( id)
         return id
     } catch (e) {
         console.error(e)

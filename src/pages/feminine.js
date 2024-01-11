@@ -10,18 +10,21 @@ const useStyles = makeStyles({
 });
 
 export default function Feminine() {
-	const { allPost:allFemPost, setPost:setFemPost } = usePost("Feminine")
+	const styles = useStyles();
+	const { allPost:allFemPost } = usePost("Feminine")
 
 	return (
 		<div>
 			<Header/>
 
 			{allFemPost.length > 0 ? (
-				allFemPost.map(post => {
+				allFemPost.map(post => (
 					<PostCard key={post._id} post={post}/>
-				})
+				))
 			): (
-				<div>Loading...</div>
+				<div className={styles.container}>
+					<Spinner size="large"/>
+				</div>
 			)}
 
 		</div>

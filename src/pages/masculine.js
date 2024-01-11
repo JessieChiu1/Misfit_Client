@@ -9,20 +9,24 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Masculine() {
-	const { allPost:allMascPost, setPost:setMascPost } = usePost("Masculine")
+export default function Feminine() {
+	const styles = useStyles();
+	const { allPost:allMascPost } = usePost("Masculine")
 
 	return (
 		<div>
 			<Header/>
 
 			{allMascPost.length > 0 ? (
-				allMascPost.map(post => {
+				allMascPost.map(post => (
 					<PostCard key={post._id} post={post}/>
-				})
+				))
 			): (
-				<div>Loading....</div>
+				<div className={styles.container}>
+					<Spinner size="large"/>
+				</div>
 			)}
+
 		</div>
 	)
 }

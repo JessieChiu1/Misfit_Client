@@ -18,13 +18,13 @@ export default function Filter() {
 
     return (
         <nav className={styles.wrapper}>
-            <ToggleButton onClick={() => handleNavigation("/feminine")}>
+            <ToggleButton size="large" onClick={() => handleNavigation("/feminine")}>
                 Feminine
             </ToggleButton>
-            <ToggleButton onClick={() => handleNavigation("/androgynous")}>
+            <ToggleButton size="large" onClick={() => handleNavigation("/androgynous")}>
                 Androgynous
             </ToggleButton>
-            <ToggleButton onClick={() => handleNavigation("/masculine")}>
+            <ToggleButton size="large" onClick={() => handleNavigation("/masculine")}>
                 Masculine
             </ToggleButton>
         </nav>

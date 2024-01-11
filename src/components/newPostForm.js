@@ -25,6 +25,7 @@ export default function NewPostForm() {
         e.preventDefault();
         const token = getToken()
         const photoId = await createPhoto(photo, token)
+        console.log(photoId)
         const payload = {
             title,
             type,
@@ -33,7 +34,6 @@ export default function NewPostForm() {
             price,
             photo: [photoId],
         }
-
         const response = await createPost(payload, token)
         if (response.hasOwnProperty('_id')) {
             handleNavigation("/")

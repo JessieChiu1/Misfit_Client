@@ -28,9 +28,10 @@ export const getPostByStyle = async(style) => {
         method: "GET",
     })
     const data = await response.json()
+    console.log(data)
     return data
 }
-
+  
 // get latest
 export const getLatestPost = async() => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/post/`, {
@@ -44,6 +45,7 @@ export const getLatestPost = async() => {
 export const deletePost = async(id) => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/post/${id}`, {
         method: "DELETE",
+        Authorization: `Bearer ${token}`,
     })
     const data = await response.json()
     return data
