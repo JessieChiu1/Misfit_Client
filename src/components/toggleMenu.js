@@ -36,7 +36,7 @@ export default function ToggleMenu() {
 
 		<MenuPopover>
 			<MenuList>
-			<MenuItemLink onClick={() => handleNavigation(`/${user.id}`)}>
+			<MenuItemLink onClick={() => handleNavigation(`/user/${user.id}`)}>
 				<Label>Profile</Label>
 			</MenuItemLink>
 			{user ? (

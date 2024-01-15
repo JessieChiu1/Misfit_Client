@@ -21,7 +21,7 @@ export const usePostByStyle = (style) => {
 				}
 			} catch (error) {
 				console.error('Error fetching posts:', error)
-				setPost([]) // Set an empty array in case of an error
+				setPost([])
 			}
 		}
 	  	fetchData()

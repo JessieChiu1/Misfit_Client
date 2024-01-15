@@ -27,13 +27,13 @@ export default function Filter() {
 
     return (
         <nav className={styles.wrapper}>
-            <Button appearance="transparent" className={styles.button} onClick={() => handleNavigation("/feminine")}>
+            <Button appearance="transparent" className={styles.button} onClick={() => handleNavigation("/style/feminine")}>
                 <Label className={styles.label} weight="bold">Feminine</Label>
             </Button>
-            <Button appearance="transparent" className={styles.button} onClick={() => handleNavigation("/androgynous")}>
+            <Button appearance="transparent" className={styles.button} onClick={() => handleNavigation("/style/androgynous")}>
                 <Label className={styles.label} weight="bold">Androgynous</Label>
             </Button>
-            <Button appearance="transparent" className={styles.button} onClick={() => handleNavigation("/masculine")}>
+            <Button appearance="transparent" className={styles.button} onClick={() => handleNavigation("/style/masculine")}>
                 <Label className={styles.label} weight="bold">Masculine</Label>
             </Button>
         </nav>
