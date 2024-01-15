@@ -13,8 +13,8 @@ export const createPost = async(payload, token) => {
 }
 
 // get specific post
-export const getPost = async(id) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/post/${id}`, {
+export const getPost = async(postId) => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/post/${postId}`, {
         method: "GET",
 
     })
@@ -28,7 +28,6 @@ export const getPostByStyle = async(style) => {
         method: "GET",
     })
     const data = await response.json()
-    console.log(data)
     return data
 }
   
@@ -42,10 +41,20 @@ export const getLatestPost = async() => {
 }
 
 // delete post
-export const deletePost = async(id) => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/post/${id}`, {
+export const deletePost = async(postId) => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/post/${postId}`, {
         method: "DELETE",
         Authorization: `Bearer ${token}`,
+    })
+    const data = await response.json()
+    return data
+}
+
+
+export const getPostByUserId = async(userId) => {
+    console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/${userId}`)
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/${userId}`, {
+        method: "GET",
     })
     const data = await response.json()
     return data

@@ -1,33 +1,62 @@
 import { useState, useEffect } from "react"
 import * as postService from "../services/post-service"
 
-export const usePost = (style) => {
-	const [allPost, setPost] = useState([]);
+export const usePostByStyle = (style) => {
+	const [allPost, setPost] = useState([])
   
 	useEffect(() => {
 		const fetchData = async () => {
-			console.log("fetching...", style)
 			try {
-		  		let data;
+		  		let data
 		  		if (style === '') {
-				data = await postService.getLatestPost();
+				data = await postService.getLatestPost()
 				} else {
 					data = await postService.getPostByStyle(style);
 				}
 
 				if (Array.isArray(data)) {
-					setPost(data);
+					setPost(data)
 				} else {
-					setPost([]);
+					setPost([])
 				}
 			} catch (error) {
-				console.error('Error fetching posts:', error);
-				setPost([]); // Set an empty array in case of an error
+				console.error('Error fetching posts:', error)
+				setPost([]) // Set an empty array in case of an error
 			}
-		};
+		}
+	  	fetchData()
+	}, [style])
   
-	  fetchData();
-	}, [style]);
+	return { allPost, setPost }
+}
+
+export const usePostByUserId = (userId) => {
+	const [allPost, setPost] = useState([])
+	const [isLoading, setIsLoading] = useState(true)
   
-	return { allPost, setPost };
-  };
+	useEffect(() => {
+	  const fetchData = async () => {
+		try {
+		  setIsLoading(true)
+  
+		  const data = await postService.getPostByUserId(userId)
+  
+		  if (Array.isArray(data)) {
+			setPost(data)
+		  } else {
+			setPost([])
+		  }
+		} catch (error) {
+		  console.error('Error fetching posts:', error)
+		  setPost([])
+		} finally {
+		  setIsLoading(false);
+		}
+	  }
+  
+	  fetchData()
+	}, [userId])
+  
+	return { allPost, isLoading }
+	
+}

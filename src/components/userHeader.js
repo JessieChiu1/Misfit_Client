@@ -7,7 +7,6 @@ const useStyles = makeStyles({
     userHeader: {
         display: "flex",
         justifyContent: "flex-end",
-        margin: "30px",
         "& > *": {
           ...shorthands.margin("10px")
         },
@@ -31,7 +30,7 @@ export default function UserHeader() {
 		<div id="user_header">
 			{user ? (
 			<div className={styles.userHeader}>
-				<Avatar onClick={() => handleNavigation(`/${user}`)} />
+				<Avatar name={user.username}/>
 				<Button  size="large" onClick={handleClickLogout}>
 					<Label>Logout</Label>
 				</Button>

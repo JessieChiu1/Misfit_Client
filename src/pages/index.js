@@ -1,7 +1,8 @@
 import PostCard from "@/components/postCard"
 import Header from "@/components/header"
-import { usePost } from "@/hooks/usePost"
-import { makeStyles, shorthands, Spinner } from "@fluentui/react-components";
+import { usePostByStyle } from "@/hooks/usePost"
+import { makeStyles, shorthands, Spinner } from "@fluentui/react-components"
+import Footer from "@/components/footer"
 
 const useStyles = makeStyles({
 	container: {
@@ -17,10 +18,10 @@ const useStyles = makeStyles({
 
 export default function Home() {
 	const styles = useStyles();
-	const { allPost } = usePost("")
+	const { allPost } = usePostByStyle("")
 
 	return (
-		<div>
+		<>
 			<Header/>
 			<section className={styles.container}>
 				{allPost.length > 0 ? (
@@ -31,7 +32,7 @@ export default function Home() {
 					<Spinner size="large" />
 				)}
 			</section>
-
-		</div>
+			<Footer/>
+		</>
 	)
 }

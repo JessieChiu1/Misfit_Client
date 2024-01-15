@@ -1,5 +1,5 @@
 import { LineHorizontal3Filled } from "@fluentui/react-icons"
-import { Menu, MenuTrigger, MenuList, MenuItemLink, MenuPopover, Button, makeStyles } from "@fluentui/react-components"
+import { Menu, MenuTrigger, MenuList, MenuItemLink, MenuPopover, Button, Label, makeStyles, shorthands } from "@fluentui/react-components"
 import { useContext } from "react"
 import { AuthContext } from "@/components/AuthProvider"
 import { useRouter } from "next/router"
@@ -9,6 +9,12 @@ const useStyles = makeStyles({
 		width: "50px",
 		height: "50px",
 	},
+	menuButton: {
+		minWidth: "75px",
+		minHeight: "75px",
+		...shorthands.padding("0px")
+	}
+
 })
 
 export default function ToggleMenu() {
@@ -23,23 +29,23 @@ export default function ToggleMenu() {
 	return (
 		<Menu>
 		<MenuTrigger disableButtonEnhancement>
-			<Button>
-			<LineHorizontal3Filled className={styles.icon} />
+			<Button className={styles.menuButton}>
+				<LineHorizontal3Filled className={styles.icon} />
 			</Button>
 		</MenuTrigger>
 
 		<MenuPopover>
 			<MenuList>
-			<MenuItemLink onClick={() => handleNavigation(`/${create}`)}>
-				PH for user
+			<MenuItemLink onClick={() => handleNavigation(`/${user.id}`)}>
+				<Label>Profile</Label>
 			</MenuItemLink>
 			{user ? (
 				<MenuItemLink onClick={() => handleNavigation("/createNewPost")}>
-				Create New Post
+					<Label>Create New Post</Label>
 				</MenuItemLink>
 			) : (
 				<MenuItemLink onClick={() => handleNavigation("/signup")}>
-				Signup or Login To Make A Post
+					<Label>Signup or Login To Make A Post</Label>
 				</MenuItemLink>
 			)}
 			</MenuList>

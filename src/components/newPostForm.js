@@ -1,14 +1,52 @@
 import { useState, useContext, useCallback } from 'react';
 import { AuthContext } from '../components/AuthProvider';
-import { Label, Input, Textarea, SpinButton, Button, Select, MessageBar, MessageBarBody, MessageBarTitle, MessageBarActions, DismissRegular } from "@fluentui/react-components";
+import { Label, Input, Textarea, SpinButton, Button, Select, makeStyles, shorthands } from "@fluentui/react-components";
 import { useRouter } from "next/router";
-import UserHeader from "@/components/userHeader"
 import { createPhoto } from '@/services/photo-service';
 import { createPost } from '@/services/post-service';
 
+const useStyles = makeStyles({
+    form_container: {
+		minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    form: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "100%",
+        height: "auto",
+        "> *": {
+            ...shorthands.margin("20px"),
+            width: "50%",
+        }
+    },
+    label : {
+        "font-size": "1.5em",
+    },
+    buttonContainer: {
+        display: "flex",
+        justifyContent: "center",
+        width: "100%",
+    },
+    button: {
+        ...shorthands.padding("10px"),
+        width: "fit-content",
+        "> *": {
+            "font-size": "1.5em",
+        }
+    },
+	textArea: {
+		height: "15rem",
+	}
+})
+
 export default function NewPostForm() {
-    const { user, getToken } = useContext(AuthContext);
-    const router = useRouter();
+    const { user, getToken } = useContext(AuthContext)
+    const router = useRouter()
+    const styles = useStyles()
 
     const [title, setTitle] = useState("")
     const [type, setType] = useState("Outerwear")
@@ -22,21 +60,26 @@ export default function NewPostForm() {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        const token = getToken()
-        const photoId = await createPhoto(photo, token)
-        console.log(photoId)
-        const payload = {
-            title,
-            type,
-            review,
-            style,
-            price,
-            photo: [photoId],
-        }
-        const response = await createPost(payload, token)
-        if (response.hasOwnProperty('_id')) {
-            handleNavigation("/")
+        try {
+            console.log("click")
+            e.preventDefault();
+            const token = getToken()
+            const photoId = await createPhoto(photo, token)
+            const payload = {
+                user: user.id,
+                title,
+                type,
+                review,
+                style,
+                price,
+                photo: [photoId],
+            };
+            const response = await createPost(payload, token)
+            if (response.hasOwnProperty('_id')) {
+                handleNavigation("/")
+            }
+        } catch (e) {
+            console.log(e)
         }
     }
 
@@ -72,10 +115,11 @@ export default function NewPostForm() {
     }
 
     return (
-        <div>
+        <div className={styles.form_container}>
 
             {user ? (
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <Label className={styles.label}>Title</Label>
                     <Input 
                         size="large"
                         type="text"
@@ -84,49 +128,50 @@ export default function NewPostForm() {
                         value={title}
                         onChange={handleChangeTitle}
                     />
-                    <div>
-                        <Label>Apparel Type</Label>
-                        <Select onChange={handleChangeType}>
+                    <Label className={styles.label}>Apparel Type</Label>
+                    <Select onChange={handleChangeType}>
                             <option>Outerwear</option>
                             <option>Top</option>
                             <option>Pant</option>
                             <option>Skirt</option>
                             <option>Accessory</option>
-                        </Select>
-                    </div>
+                    </Select>
+                    <Label className={styles.label}>Review</Label>
                     <Textarea 
-                        size="large"
-                        type="text"
-                        name="review"
-                        placeholder="Please describe the item you are showcasing. If possible include the brand name and why this item is a great find!"
-                        value={review}
-                        onChange={handleChangeReview}
+							className={styles.textArea}
+                            type="text"
+                            name="review"
+							resize='vertical'
+                            placeholder={`Please describe the item you are showcasing.\nIf possible, include the brand name and why this item is a great find!\nDoes it fit your shoulder or hip?\nDoes it hide your curve?`}
+                            value={review}
+                            onChange={handleChangeReview}
                     />
-                    <div>
-                        <Label>Style</Label>
-                        <Select onChange={handleChangeStyle}>
+                    <Label className={styles.label}>Style</Label>
+                    <Select onChange={handleChangeStyle}>
                             <option>Feminine</option>
                             <option>Androgynous</option>
                             <option>Masculine</option>
-                        </Select>
-                    </div>
+                    </Select>
+					<Label className={styles.label}>Price</Label>
 					<SpinButton
 						value={price.toString()}
 						displayValue={`$${Math.max(price, 0)}`}
 						min={0}
 						onChange={handleChangePrice}
 					/>
+					<Label className={styles.label}>Upload a Picture</Label>
                     <input 
                         type="file"
                         onChange={handleChangePhoto}
                     />
-                    <Button type="submit">Create Post</Button>
+                    <div className={styles.buttonContainer}>
+                        <Button className={styles.button} type="submit">
+                            CreatePost
+                        </Button>
+                    </div>
                 </form>
             ) : (
-                <nav>
-                    <Label>Please sign up or login to make a post.</Label>
-                    <UserHeader />
-                </nav>
+                <Label className={styles.label}>Please sign up or login to make a post.</Label>
             )}
         </div>
     )

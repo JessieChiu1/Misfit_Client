@@ -1,6 +1,6 @@
 import PostCard from "@/components/postCard"
 import Header from "@/components/header"
-import { usePost } from "@/hooks/usePost"
+import { usePostByStyle } from "@/hooks/usePost"
 import { makeStyles, shorthands, Spinner } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
@@ -11,17 +11,16 @@ const useStyles = makeStyles({
 		alignItems: "center",
 		minHeight: "100vh",
 		...shorthands.padding("20px"),
-		"background-color": "#FFD2E2",
 	},
 })
   
 
 export default function Feminine() {
 	const styles = useStyles();
-	const { allPost:allFemPost } = usePost("")
+	const { allPost:allFemPost } = usePostByStyle("Feminine")
 
 	return (
-		<div>
+		<>
 			<Header/>
 			<section className={styles.container}>
 				{allFemPost.length > 0 ? (
@@ -32,7 +31,7 @@ export default function Feminine() {
 					<Spinner size="large" />
 				)}
 			</section>
-
-		</div>
+			<Footer/>
+		</>
 	)
 }

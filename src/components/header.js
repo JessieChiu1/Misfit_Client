@@ -1,7 +1,8 @@
 import UserHeader from "@/components/userHeader"
 import Filter from "@/components/filter"
-import { makeStyles, Image, shorthands } from "@fluentui/react-components";
+import { makeStyles, Image, shorthands, Button } from "@fluentui/react-components";
 import ToggleMenu from "@/components/toggleMenu"
+import { useRouter } from "next/router";
 
 
 const useStyles = makeStyles({
@@ -15,6 +16,8 @@ const useStyles = makeStyles({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        width: "100%",
+        height: "auto"
     },
     logo: {
         width: "25%",
@@ -24,6 +27,11 @@ const useStyles = makeStyles({
 
 export default function Header() {
     const styles = useStyles()
+    const router = useRouter()
+
+    const handleNavigation = () => {
+        router.push("/")
+    }
 
     return (
         <nav>
@@ -31,11 +39,14 @@ export default function Header() {
                 <ToggleMenu/>
                 <UserHeader/>
             </div>
-            <div className={styles.logo_container}>
-                <Image className={styles.logo}
-                    src="https://misfit-photo.s3.us-east-2.amazonaws.com/logo.png"
+            <Button appearance="transparent" className={styles.logo_container}>
+                <Image 
+                    className={styles.logo}
+                    src="/logo.png"
+                    alt="logo"
+                    onClick={handleNavigation}
                 />
-            </div>
+            </Button>
             <div id="filter">
                 <Filter/>
             </div>

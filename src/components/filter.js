@@ -1,4 +1,4 @@
-import { makeStyles, ToggleButton, Label, shorthands } from "@fluentui/react-components";
+import { makeStyles, Button, Label, shorthands } from "@fluentui/react-components";
 import { useRouter } from 'next/router';
 
 const useStyles = makeStyles({
@@ -6,9 +6,15 @@ const useStyles = makeStyles({
         display: "flex",
         alignItems: "center",
         justifyContent: "space-evenly",
-        ...shorthands.padding("20px"),
+        ...shorthands.margin("10px")
+    },
+    button: {
+        ...shorthands.padding("10px"),
+        width: "fit-content",
+    },
+    label: {
+        fontSize: "1.5em",
     }
-
 });
 
 export default function Filter() {
@@ -21,15 +27,15 @@ export default function Filter() {
 
     return (
         <nav className={styles.wrapper}>
-            <ToggleButton size="large" onClick={() => handleNavigation("/feminine")}>
-                <Label size="large" weight="bold">Feminine</Label>
-            </ToggleButton>
-            <ToggleButton size="large" onClick={() => handleNavigation("/androgynous")}>
-                <Label size="large" weight="bold">Androgynous</Label>
-            </ToggleButton>
-            <ToggleButton size="large" onClick={() => handleNavigation("/masculine")}>
-                <Label size="large" weight="bold">Masculine</Label>
-            </ToggleButton>
+            <Button appearance="transparent" className={styles.button} onClick={() => handleNavigation("/feminine")}>
+                <Label className={styles.label} weight="bold">Feminine</Label>
+            </Button>
+            <Button appearance="transparent" className={styles.button} onClick={() => handleNavigation("/androgynous")}>
+                <Label className={styles.label} weight="bold">Androgynous</Label>
+            </Button>
+            <Button appearance="transparent" className={styles.button} onClick={() => handleNavigation("/masculine")}>
+                <Label className={styles.label} weight="bold">Masculine</Label>
+            </Button>
         </nav>
     )
 }

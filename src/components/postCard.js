@@ -1,4 +1,4 @@
-import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Text, Body1, Image, Label, shorthands} from "@fluentui/react-components";
+import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Text, Body1, Image, Label, shorthands, Avatar} from "@fluentui/react-components";
 
 const useStyles = makeStyles({
 	card: {
@@ -6,6 +6,9 @@ const useStyles = makeStyles({
 	  	width: "500px",
 	  	maxWidth: "100%",
 	},
+	review_text: {
+		whiteSpace: "pre-line",
+	}
 })
 
 export default function PostCard({ post }) {
@@ -14,11 +17,12 @@ export default function PostCard({ post }) {
 	return (
 		<Card className={styles.card} size="large">
 			<CardHeader
-				header={
-					<Body1>
-						<Label size="large">{post.title}</Label >
-					</Body1>
-				}
+				image={<Avatar name={post.user.username} />}
+                header={
+                    <Body1>
+                        <Label size="large">{post.title}</Label>
+                    </Body1>
+                }
 			/>
 			<CardPreview>
 				<Image
@@ -27,7 +31,7 @@ export default function PostCard({ post }) {
 				/>
 			</CardPreview>
 			<CardFooter>
-				<Text>{post.review}</Text>
+				<Text className="review_text">{post.review}</Text>
 			</CardFooter>
 	  	</Card>
 	)
