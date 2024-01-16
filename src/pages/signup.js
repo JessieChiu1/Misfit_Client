@@ -31,7 +31,11 @@ const useStyles = makeStyles({
             fontSize: "1.5em",
         }
     },
-    
+    title: {
+        display: "flex",
+        justifyContent: "center",
+        fontSize: "2.5em",
+    },
     label : {
         display: "flex",
         justifyContent: "center",
@@ -108,7 +112,7 @@ export default function Login() {
         <Header/>
         <div className={styles.form_container}>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <Label className={styles.label} weight='bold'>Sign Up</Label>
+                <Label className={styles.title} weight='bold'>Sign Up</Label>
                 <Label size='large' weight='bold'>Username</Label>
                 <Input 
                     size="large"
@@ -135,7 +139,7 @@ export default function Login() {
                     value={password1}
                     onChange={handleChangePassword1}
                 />
-                <Button className={styles.button}type="submit"><Label>Sign  up</Label></Button>
+                <Button className={styles.button}type="submit">Sign up</Button>
             </form>
         </div>
         <Footer/>

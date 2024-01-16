@@ -7,6 +7,7 @@ const useStyles = makeStyles({
     userHeader: {
         display: "flex",
         justifyContent: "flex-end",
+		alignItems: "center",
         "& > *": {
           ...shorthands.margin("10px")
         },
