@@ -1,6 +1,6 @@
 import { useState, useContext, useCallback } from 'react'
-import { AuthContext } from './AuthProvider'
-import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Input, Body1, Image, Label, shorthands, Avatar, Select, SpinButton, Textarea, Button} from "@fluentui/react-components" 
+import { AuthContext } from '../components/AuthProvider'
+import { Label, Input, Textarea, SpinButton, Button, Select, makeStyles, shorthands } from "@fluentui/react-components"
 import { useRouter } from "next/router"
 import { createPhoto } from '@/services/photo-service'
 import { createPost } from '@/services/post-service'
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
         "> *": {
             ...shorthands.margin("20px"),
             width: "50%",
-        },
+        }
     },
     label : {
         "font-size": "1.5em",
@@ -40,36 +40,7 @@ const useStyles = makeStyles({
     },
 	textArea: {
 		height: "15rem",
-	},
-    card: {
-		...shorthands.margin("20px"),
-	  	minWidth: "300px",
-	},
-	review_text: {
-		whiteSpace: "pre-line",
-	},
-	content: {
-		display: "flex",
-		flexDirection: "column",
-	},
-	row: {
-		display: "flex",
-        flexWrap: "wrap",
-		"> *": {
-			marginRight: "10px",
-            marginBottom: "10px",
-		},
-	},
-    file_input: {
-        minHeight: "50vh",
-        width: "100%"
-    },
-    file_container: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%", 
-    },
+	}
 })
 
 export default function NewPostForm() {
@@ -148,66 +119,25 @@ export default function NewPostForm() {
 
             {user ? (
                 <form onSubmit={handleSubmit} className={styles.form}>
-                <Card className={styles.card} size="large">
-                    <CardHeader
-                        image={<Avatar name={user.username} />}
-                        header={
-                            <Body1>
-                                <Input 
-                                    size="large"
-                                    type="text"
-                                    name="title"
-                                    placeholder="Title"
-                                    value={title}
-                                    onChange={handleChangeTitle}
-                                />
-                            </Body1>
-                        }
+                    <Label className={styles.label}>Title</Label>
+                    <Input 
+                        size="large"
+                        type="text"
+                        name="title"
+                        placeholder="Title"
+                        value={title}
+                        onChange={handleChangeTitle}
                     />
-                    <CardPreview>
-                        {photo ? (
-                            <Image 
-                                src={URL.createObjectURL(photo)} alt="Example" />
-                        ) : (
-                            <div className={styles.file_container}>
-                                <Input
-                                id="photo_upload"
-                                className={styles.file_input}
-                                type="file"
-                                onChange={handleChangePhoto}
-                                accept="image/*"
-                                />
-                            </div>
-                        )}
-                    </CardPreview>
-                    <CardFooter className={styles.content}>
-                        <div className={styles.row}>
-                        <Select onChange={handleChangeStyle}>
-                            <option>Feminine</option>
-                            <option>Androgynous</option>
-                            <option>Masculine</option>
-                        </Select>
-                            <Select onChange={handleChangeType}>
-                                <option>Outerwear</option>
-                                <option>Top</option>
-                                <option>Pant</option>
-                                <option>Skirt</option>
-                                <option>Accessory</option>
-                            </Select>
-                            <SpinButton
-                                value={price.toString()}
-                                displayValue={`$${Math.max(price, 0)}`}
-                                min={0}
-                                onChange={handleChangePrice}
-                            />
-                            <Button onClick={() => setPhoto()}>
-                                <Label>Remove Photo</Label>
-                            </Button>
-                        </div>
-                        <div className={styles.row}>
-                            <Image src="/orange_heart_high_contrast.svg"/>
-                        </div>
-                        <Textarea 
+                    <Label className={styles.label}>Apparel Type</Label>
+                    <Select onChange={handleChangeType}>
+                            <option>Outerwear</option>
+                            <option>Top</option>
+                            <option>Pant</option>
+                            <option>Skirt</option>
+                            <option>Accessory</option>
+                    </Select>
+                    <Label className={styles.label}>Review</Label>
+                    <Textarea 
 							className={styles.textArea}
                             type="text"
                             name="review"
@@ -215,10 +145,26 @@ export default function NewPostForm() {
                             placeholder={`Please describe the item you are showcasing.\nIf possible, include the brand name and why this item is a great find!\nDoes it fit your shoulder or hip?\nDoes it hide your curve?`}
                             value={review}
                             onChange={handleChangeReview}
-                        />
-                    </CardFooter>
-                </Card>
-                <div className={styles.buttonContainer}>
+                    />
+                    <Label className={styles.label}>Style</Label>
+                    <Select onChange={handleChangeStyle}>
+                            <option>Feminine</option>
+                            <option>Androgynous</option>
+                            <option>Masculine</option>
+                    </Select>
+					<Label className={styles.label}>Price</Label>
+					<SpinButton
+						value={price.toString()}
+						displayValue={`$${Math.max(price, 0)}`}
+						min={0}
+						onChange={handleChangePrice}
+					/>
+					<Label className={styles.label}>Upload a Picture</Label>
+                    <input 
+                        type="file"
+                        onChange={handleChangePhoto}
+                    />
+                    <div className={styles.buttonContainer}>
                         <Button className={styles.button} type="submit">
                             CreatePost
                         </Button>
