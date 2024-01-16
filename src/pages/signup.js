@@ -1,10 +1,12 @@
 import { useState, useContext } from 'react'
-import { signup } from "../services/auth-service"
-import { AuthContext } from '../components/AuthProvider'
 import { Label, Input, Button, makeStyles, shorthands } from "@fluentui/react-components";
 import { useRouter } from "next/router"
-import Header from "@/components/header"
-import Footer from '@/components/footer';
+import { AuthContext } from '../components/providers/AuthProvider'
+import { signup } from "../services/auth-service"
+import Header from "@/components/layout/header"
+import Footer from "@/components/layout/footer"
+import CustomMessageBar from "@/components/customMessageBar"
+import { MessageContext } from '@/components/providers/MessageProvider';
 
 const useStyles = makeStyles({
     form_container: {
@@ -17,29 +19,35 @@ const useStyles = makeStyles({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "flex-start",
-        minWidth: "50%",
+        alignItems: "center",
+        minWidth: "300px",
+        width: "30%",
+        ...shorthands.border("solid"),
+        ...shorthands.borderRadius("15px"),
+        ...shorthands.padding("20px"),
         "> *": {
-            ...shorthands.margin("10px"),
-            width: "100%",
+            ...shorthands.margin("15px"),
+            width: "90%",
+            fontSize: "1.5em",
         }
     },
+    
     label : {
-        "font-size": "1.5em",
-    },
-    buttonContainer: {
         display: "flex",
-        justifyContent: "center", 
-        width: "100%",
+        justifyContent: "center",
+        fontSize: "2em",
     },
     button: {
-        ...shorthands.padding("10px"),
-        width: "fit-content",
-    },
+        ...shorthands.padding("15px"),
+        verticalAlign: "center",
+        width: "50%",
+        "> *": {
+            fontSize: "1em",
+        }
+    }
 })
 
-
-export default function Signup() {
+export default function Login() {
     const router = useRouter()
     const styles = useStyles()
 
@@ -47,7 +55,8 @@ export default function Signup() {
     const [password, setPassword] = useState("")
     const [password1, setPassword1] = useState("")
 
-    const { setToken } = useContext(AuthContext);
+    const { setToken } = useContext(AuthContext)
+    const { message: errorMessage, setMessage: setErrorMessage } = useContext(MessageContext)
 
     const handleNavigation = (route) => {
         router.push(route)
@@ -65,28 +74,41 @@ export default function Signup() {
         setPassword1(e.target.value)
     }
 
-    const handleSubmit = async(e) => {
-        e.preventDefault()
-        if(password === password1 && username) {
-            const payload = {
-                username,
-                password,
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            if(password === password1 && username) {
+                const payload = {
+                    username,
+                    password,
+                }
+
+                const response = await signup(payload)
+                if (response.token) {
+                    setToken(response.token)
+                    handleNavigation("/")
+                } else {
+                    setErrorMessage(response.message)
+                    console.log(errorMessage)
+                    setUsername("")
+                    setPassword("")
+                }
+            } else {
+                setErrorMessage("Please enter both username and password.")
             }
-            console.log(payload)
-            const token = await signup(payload)
-            setToken(token)
-            handleNavigation("/")
-        } else {
-            alert("password does not match or missing username")
+        } catch (error) {
+            console.error("Error during login:", error);
+            setErrorMessage("An unexpected error occurred. Please try again later.")
         }
     }
 
     return (
         <>
+        <CustomMessageBar/>
         <Header/>
         <div className={styles.form_container}>
-            <form onSubmit={handleSubmit} className={styles.form}>
-            <Label className={styles.label} weight='bold'>Sign up</Label>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <Label className={styles.label} weight='bold'>Sign Up</Label>
                 <Label size='large' weight='bold'>Username</Label>
                 <Input 
                     size="large"
@@ -109,13 +131,11 @@ export default function Signup() {
                     size="large"
                     type="password" 
                     name="password1"
-                    placeholder="Re-type Password"
+                    placeholder="Re-Type Password"
                     value={password1}
                     onChange={handleChangePassword1}
                 />
-                <div className={styles.buttonContainer}>
-                    <Button className={styles.button}type="submit"><Label>Sign up</Label></Button>
-                </div>
+                <Button className={styles.button}type="submit"><Label>Sign  up</Label></Button>
             </form>
         </div>
         <Footer/>

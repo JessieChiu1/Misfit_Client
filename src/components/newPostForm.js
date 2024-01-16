@@ -1,5 +1,5 @@
 import { useState, useContext, useCallback } from 'react'
-import { AuthContext } from './AuthProvider'
+import { AuthContext } from './providers/AuthProvider'
 import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Input, Body1, Image, Label, shorthands, Avatar, Select, SpinButton, Textarea, Button} from "@fluentui/react-components" 
 import { useRouter } from "next/router"
 import { createPhoto } from '@/services/photo-service'

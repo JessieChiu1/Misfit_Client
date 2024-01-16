@@ -9,7 +9,6 @@ const useStyles = makeStyles({
 		width: "100%",
     },
     subItem: {
-		flex: "1",
 		display: "flex",
 		flexDirection: "column",
 		justifyContent: "center",

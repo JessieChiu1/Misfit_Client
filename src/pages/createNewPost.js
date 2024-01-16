@@ -1,6 +1,6 @@
-import Header from "@/components/header"
+import Header from "@/components/layout/header"
 import NewPostForm from "@/components/newPostForm"
-import Footer from "@/components/footer"
+import Footer from "@/components/layout/footer"
 
 export default function CreateNewPost() {
     return (

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import * as postService from "../services/post-service"
 
-export const usePostByStyle = (style) => {
+export const usePostByStyle = (style, type = undefined) => {
 	const [allPost, setPost] = useState([])
   
 	useEffect(() => {
@@ -9,9 +9,9 @@ export const usePostByStyle = (style) => {
 			try {
 		  		let data
 		  		if (style === '') {
-				data = await postService.getLatestPost()
+					data = await postService.getLatestPost()
 				} else {
-					data = await postService.getPostByStyle(style);
+					data = await postService.getPostByStyleAndFilter(style, type)
 				}
 
 				if (Array.isArray(data)) {

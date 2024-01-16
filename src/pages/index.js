@@ -1,8 +1,8 @@
 import PostCard from "@/components/postCard"
-import Header from "@/components/header"
+import Header from "@/components/layout/header"
 import { usePostByStyle } from "@/hooks/usePost"
 import { makeStyles, shorthands, Spinner } from "@fluentui/react-components"
-import Footer from "@/components/footer"
+import Footer from "@/components/layout/footer"
 
 const useStyles = makeStyles({
 	container: {

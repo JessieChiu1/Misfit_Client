@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { AuthContext } from "@/components/AuthProvider"
+import { AuthContext } from "@/components/providers/AuthProvider"
 import { Avatar, Button, Label, makeStyles, shorthands } from "@fluentui/react-components"
 import { useRouter } from "next/router"
 
@@ -30,6 +30,7 @@ export default function UserHeader() {
 		<div id="user_header">
 			{user ? (
 			<div className={styles.userHeader}>
+				<Label>{`Welcome ${user.username}!`}</Label>
 				<Avatar name={user.username}/>
 				<Button  size="large" onClick={handleClickLogout}>
 					<Label>Logout</Label>

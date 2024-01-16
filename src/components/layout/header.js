@@ -1,7 +1,7 @@
-import UserHeader from "@/components/userHeader"
-import Filter from "@/components/filter"
+import UserHeader from "@/components/layout/userHeader"
+import Filter from "@/components/layout/filter"
 import { makeStyles, Image, shorthands, Button } from "@fluentui/react-components";
-import ToggleMenu from "@/components/toggleMenu"
+import ToggleMenu from "@/components/layout/toggleMenu"
 import { useRouter } from "next/router";
 
 

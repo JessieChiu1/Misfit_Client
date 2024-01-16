@@ -3,7 +3,7 @@ export const createPhoto = async (photo, token) => {
         const formData = new FormData()
         formData.append('file', photo)
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/photo`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/api/v1/photo`, {
             method: 'POST',
             body: formData,
             headers: {
@@ -22,7 +22,7 @@ export const createPhoto = async (photo, token) => {
 
 
 export const deletePhoto = async(id) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/photo/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/api/v1/photo/${id}`, {
         method: "DELETE",
     })
     const data = await response.json()

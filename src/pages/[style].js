@@ -1,8 +1,10 @@
 import PostCard from "@/components/postCard"
-import Header from "@/components/header"
+import Header from "@/components/layout/header"
 import { usePostByStyle } from "@/hooks/usePost"
 import { makeStyles, shorthands, Spinner } from "@fluentui/react-components"
-import Footer from "@/components/footer"
+import Footer from "@/components/layout/footer"
+import { useRouter } from 'next/router'
+import { useSearchParams } from 'next/navigation'
 
 const useStyles = makeStyles({
 	container: {
@@ -16,16 +18,20 @@ const useStyles = makeStyles({
 })
   
 
-export default function Feminine() {
-	const styles = useStyles();
-	const { allPost:allFemPost } = usePostByStyle("Feminine")
+export default function PostList() {
+	const cssStyles = useStyles()
+    const router = useRouter()
+    console.log(router.query)
+    const { style, type } = router.query
+
+	const { allPost } = usePostByStyle(style, type)
 
 	return (
 		<>
 			<Header/>
-			<section className={styles.container}>
-				{allFemPost.length > 0 ? (
-					allFemPost.map((post) => (
+			<section className={cssStyles.container}>
+				{allPost.length > 0 ? (
+					allPost.map((post) => (
 						<PostCard size="large" key={post._id} post={post}/>
 					))
 				) : (
