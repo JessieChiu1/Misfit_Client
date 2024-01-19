@@ -11,7 +11,7 @@ const useStyles = makeStyles({
         "& > *": {
           ...shorthands.margin("10px")
         },
-    },
+    }
 })
 
 export default function UserHeader() {
@@ -39,11 +39,11 @@ export default function UserHeader() {
 			</div>
 			) : (
 				<div className={styles.userHeader}>
-				<Button size="large" onClick={() => handleNavigation("/signup")}>
-					<Label>Sign up</Label>
+				<Button appearance="primary" size="large"  onClick={() => handleNavigation("/signup")}>
+					Sign Up
 				</Button>
-				<Button size="large" onClick={() => handleNavigation("/login")}>
-					<Label>Login</Label>
+				<Button appearance="primary" size="large" onClick={() => handleNavigation("/login")}>
+					Login
 				</Button>
 			</div>
 			)}

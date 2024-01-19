@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { Label, Input, Button, makeStyles, shorthands } from "@fluentui/react-components";
 import { useRouter } from "next/router"
-import { AuthContext } from '../components/providers/AuthProvider'
+import { AuthContext } from "@/components/providers/AuthProvider"
 import { signup } from "../services/auth-service"
 import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
@@ -139,7 +139,7 @@ export default function Login() {
                     value={password1}
                     onChange={handleChangePassword1}
                 />
-                <Button className={styles.button}type="submit">Sign up</Button>
+                <Button className={styles.button} appearance="primary" type="submit">Sign up</Button>
             </form>
         </div>
         <Footer/>

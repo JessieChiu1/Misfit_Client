@@ -5,6 +5,8 @@ import { useRouter } from "next/router"
 import { createPhoto } from '@/services/photo-service'
 import { createPost } from '@/services/post-service'
 
+const optionList = ["Outfit Showcase","Activewear", "Coats", "Jackets & Blazers", "Suits & Separates", "Dresses", "Jeans & Denim", "Loungewear", "Pants & Leggings", "Skirts", "Sleepwear", "Sweaters", "Sweatshirts & Hoodies", "Swimsuits & Cover-Ups", "T-Shirt and Tops", "Shoes", "Accessory", "Underwear", "Bra", "Shorts", "Swimwear", "Dress Shirt", "Blouses", "Jumpsuits & Rompers"]
+
 const useStyles = makeStyles({
     form_container: {
 		minHeight: "100vh",
@@ -22,9 +24,6 @@ const useStyles = makeStyles({
             ...shorthands.margin("20px"),
             width: "50%",
         },
-    },
-    label : {
-        "font-size": "1.5em",
     },
     buttonContainer: {
         display: "flex",
@@ -72,13 +71,13 @@ const useStyles = makeStyles({
     },
 })
 
-export default function NewPostForm() {
+export default function newPostForm() {
     const { user, getToken } = useContext(AuthContext)
     const router = useRouter()
     const styles = useStyles()
 
     const [title, setTitle] = useState("")
-    const [type, setType] = useState("Outerwear")
+    const [type, setType] = useState("Outfit Showcase")
     const [review, setReview] = useState("")
     const [style, setStyle] = useState("Feminine")
     const [price, setPrice] = useState(null | 0)
@@ -187,25 +186,18 @@ export default function NewPostForm() {
                             <option>Androgynous</option>
                             <option>Masculine</option>
                         </Select>
-                            <Select onChange={handleChangeType}>
-                                <option>Outerwear</option>
-                                <option>Top</option>
-                                <option>Pant</option>
-                                <option>Skirt</option>
-                                <option>Accessory</option>
-                            </Select>
-                            <SpinButton
+                        <Select onChange={handleChangeType}>
+                            {optionList.map((option) => (
+                                <option key={option}>{option}</option>
+                            ))}
+                        </Select>
+                        <SpinButton
                                 value={price.toString()}
                                 displayValue={`$${Math.max(price, 0)}`}
                                 min={0}
                                 onChange={handleChangePrice}
                             />
-                            <Button onClick={() => setPhoto()}>
-                                <Label>Remove Photo</Label>
-                            </Button>
-                        </div>
-                        <div className={styles.row}>
-                            <Image src="/orange_heart_high_contrast.svg"/>
+                        <Button onClick={() => setPhoto()}>Remove Photo</Button>
                         </div>
                         <Textarea 
 							className={styles.textArea}
@@ -219,13 +211,13 @@ export default function NewPostForm() {
                     </CardFooter>
                 </Card>
                 <div className={styles.buttonContainer}>
-                        <Button className={styles.button} type="submit">
-                            CreatePost
+                        <Button className={styles.button} appearance="primary" type="submit">
+                            Create Post
                         </Button>
                     </div>
                 </form>
             ) : (
-                <Label className={styles.label}>Please sign up or login to make a post.</Label>
+                <Label size="large" weight="semibold">Please sign up or login to make a post.</Label>
             )}
         </div>
     )

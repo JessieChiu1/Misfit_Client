@@ -43,10 +43,18 @@ export default function Footer() {
         <footer className={styles.footer}>
             <section className={styles.subItem}>
                 <Label className={styles.label}>About</Label>
-                <Link>About this Website</Link>
+                <Link>About Misfit</Link>
                 <Link>Report a Bug</Link>
-				<Link>Contact for any other issue</Link>
+				<Link>FAQs</Link>
+				<Link>Misfit Guidelines</Link>
 				<Link>Future Features</Link>
+            </section>
+			<section className={styles.subItem}>
+                <Label className={styles.label}>Terms and Condition</Label>
+                <Link>Privacy Policy</Link>
+                <Link>Terms of Service</Link>
+				<Link>Newsletter Signup</Link>
+				<Link>Accessibility Information</Link>
             </section>
             <section className={styles.subItem}>
                 <Label className={styles.label}>Contact Me</Label>
