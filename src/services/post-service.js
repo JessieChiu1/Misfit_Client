@@ -55,8 +55,6 @@ export const deletePost = async (postId, token) => {
 	return data
 }
 
-
-
 export const getPostByUserId = async(userId) => {
 	const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/api/v1/user/${userId}`, {
 		method: "GET",
