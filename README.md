@@ -1,38 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Misfit Client
 
-## Getting Started
+## Setting up .env file 
+Your `.env.local` file should look something like this:
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+```
+NEXT_PUBLIC_SERVER_API_URL=server endpoint beginning URL
+NEXT_PUBLIC_API_URL=client endpoint beginning URL, should be domain in the future
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## File structures and file you will need to create
+    public                              # static file and logos
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+    src
+    ├── components                      # database connection configuration
+    │   └── layout                      # components associated with the header and footer
+    │       └── filter.js               # take the 3 filterMenu.js component to have all 3 styles in the nav bar
+    │       └── filterMenu.js           # Dropdown filter for Masculine/Feminine/Androgynous
+    │       └── footer.js               # the whole footer at the bottom
+    │       └── header.js               # the whole header that compromise of the filter/toggleMenu/userHeader
+    │       └── toggleMenu.js           # hamburger dropdown menu
+    │       └── userHeader.js           # login/signup button at the top of the header
+    │   └── providers                   # all providers (useContext)
+    │       └── AuthProvider.js         # useContext for storing the user/token information
+    │       └── MessageProvider.js      # useContext for the error message bar
+    │   └── customMessageBar.js         # the error message bar component that take the MessageProvider's useContext
+    │   └── editPostForm.js             
+    │   └── newPostForm.js        
+    │   └── postCard.js        
+    │
+    ├── hooks                           
+    │   ├── usePost.js                  # useEffect hook to fetch posts from backend for rendering
+    │
+    ├── pages                           # actual pages 
+    ├── services                        # functions that fetch data from backend
+    │   ├── auth-service.js
+    │   ├── photo-service.js
+    │   └── post-service.js
+    │   
+    └── styles                          # default css file from next.js starter file
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+    .env.local
+    .gitignore
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## libraries and what they are
+- `next` - this is the react framework we are using
+- `@fluentui/react-components` - UI component library for styling my components
+- `@fluentui/react-icons` - common UI icon library for styling
 
-## Learn More
+## Running the files:
+1. `npm run dev`
+2. make sure your backend is also up and running
+You should see something like this:
+    ```
+    > my-app@0.1.0 dev
+    > next dev
 
-To learn more about Next.js, take a look at the following resources:
+   ▲ Next.js 14.0.3
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## TODOs
+- TODOs for soft launch
+    - **Edit posts** 
+    - **Commenting on posts and replying to comments**
+        - **Allowing OP to self moderate their posts by allowing them to delete any comments**
+    - **Adding hashtags to the posts**
+        - **Thinking about promoting designated hashtags to target specific problems the transgender community faced**
+            - Example: narrow shoulder, wide shoulder, big feet, small feet, sleeves length
+    - **Flesh out the postCard component**
+        - **Need to add "likes" features**
+    - **Consult the transgender community on the language of the website, make sure it is not offensive and is the right terminology that people are comfortable with**
+- TODOs for after soft launch
+    - **Creating a email address with our domain name**
+    - **Allowing users to send bug report to our designated email**
+    - **Switching the authentication feature to "Sign in with Gmail" and use email instead of username to sign in**
+        - **Allowing user to reset password by sending them an email**
+    - **Need to look into privacy notice and terms & condition**
+    - **Fill in the footer's links information**
+    - **Making sure the website is secured**
+    - **Further Optimizations to make sure the website runs smoothly**
