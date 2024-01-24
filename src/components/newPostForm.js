@@ -22,7 +22,7 @@ const useStyles = makeStyles({
         height: "auto",
         "> *": {
             ...shorthands.margin("20px"),
-            width: "50%",
+            width: "80%",
         },
     },
     buttonContainer: {
