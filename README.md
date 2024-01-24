@@ -68,7 +68,6 @@ You should see something like this:
         - **Thinking about promoting designated hashtags to target specific problems the transgender community faced**
             - Example: narrow shoulder, wide shoulder, big feet, small feet, sleeves length
     - **Flesh out the postCard component**
-        - **Need to add "likes" features**
     - **Consult the transgender community on the language of the website, make sure it is not offensive and is the right terminology that people are comfortable with**
 - TODOs for after soft launch
     - **Creating a email address with our domain name**
