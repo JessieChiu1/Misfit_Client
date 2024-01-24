@@ -9,7 +9,7 @@ export const signup = async (payload) => {
         body: JSON.stringify(payload)
     })
     const data = await response.json()
-    return data.token
+    return data
 }
 
 export const login = async (payload) => {

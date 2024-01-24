@@ -22,7 +22,7 @@ const useStyles = makeStyles({
         height: "auto",
         "> *": {
             ...shorthands.margin("20px"),
-            width: "80%",
+            width: "50%",
         },
     },
     buttonContainer: {
@@ -89,7 +89,8 @@ export default function newPostForm() {
 
     const handleSubmit = async (e) => {
         try {
-            e.preventDefault()
+            console.log("click")
+            e.preventDefault();
             const token = getToken()
             const photoId = await createPhoto(photo, token)
             const payload = {
@@ -98,8 +99,8 @@ export default function newPostForm() {
                 type,
                 review,
                 style,
-                like: [],
                 price,
+                like: [user.id],
                 photo: [photoId],
             };
             const response = await createPost(payload, token)

@@ -81,6 +81,7 @@ export default function Login() {
                 }
 
                 const response = await login(payload)
+                console.log(response.token)
                 if (response.token) {
                     setToken(response.token)
                     handleNavigation("/")
@@ -90,12 +91,9 @@ export default function Login() {
                     setUsername("")
                     setPassword("")
                 }
-            } else {
-                setErrorMessage("Please enter both username and password.")
             }
         } catch (error) {
-            console.error("Error during login:", error);
-            setErrorMessage("An unexpected error occurred. Please try again later.")
+            console.error("Error during login:", error)
         }
     }
     
