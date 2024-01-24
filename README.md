@@ -22,8 +22,6 @@ NEXT_PUBLIC_API_URL=client endpoint beginning URL, should be domain in the futur
     │       └── userHeader.js           # login/signup button at the top of the header
     │   └── providers                   # all providers (useContext)
     │       └── AuthProvider.js         # useContext for storing the user/token information
-    │       └── MessageProvider.js      # useContext for the error message bar
-    │   └── customMessageBar.js         # the error message bar component that take the MessageProvider's useContext
     │   └── editPostForm.js             
     │   └── newPostForm.js        
     │   └── postCard.js        

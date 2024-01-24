@@ -5,8 +5,6 @@ import { AuthContext } from "@/components/providers/AuthProvider"
 import { signup } from "../services/auth-service"
 import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
-import CustomMessageBar from "@/components/customMessageBar"
-import { MessageContext } from '@/components/providers/MessageProvider';
 
 const useStyles = makeStyles({
     form_container: {
@@ -60,7 +58,7 @@ export default function Login() {
     const [password1, setPassword1] = useState("")
 
     const { setToken } = useContext(AuthContext)
-    const { message: errorMessage, setMessage: setErrorMessage } = useContext(MessageContext)
+
 
     const handleNavigation = (route) => {
         router.push(route)
@@ -108,7 +106,6 @@ export default function Login() {
 
     return (
         <>
-        <CustomMessageBar/>
         <Header/>
         <div className={styles.form_container}>
             <form className={styles.form} onSubmit={handleSubmit}>

@@ -7,11 +7,11 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         if (typeof window !== "undefined") {
-            const token = localStorage.getItem("token") || undefined;
+            const token = localStorage.getItem("token") || undefined
             const payload = token && parseJwt(token);
             setUser(payload && { username: payload.username, id: payload.id });
         }
-    }, []);
+    }, [])
 
     const setToken = (token) => {
         if (typeof window !== "undefined") {
@@ -21,16 +21,16 @@ export const AuthProvider = ({ children }) => {
             } else {
                 localStorage.setItem("token", token);
                 const payload = token && parseJwt(token);
-                setUser(payload && { username: payload.username, id: payload.id });
+                setUser(payload && { username: payload.username, id: payload.id })
             }
         }
-    };
+    }
 
     const getToken = () => {
         if (typeof window !== "undefined") {
-            return localStorage.getItem("token") || undefined;
+            return localStorage.getItem("token") || undefined
         }
-        return undefined;
+        return undefined
     };
 
     return (
