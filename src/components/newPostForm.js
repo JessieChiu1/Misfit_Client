@@ -89,8 +89,7 @@ export default function newPostForm() {
 
     const handleSubmit = async (e) => {
         try {
-            console.log("click")
-            e.preventDefault();
+            e.preventDefault()
             const token = getToken()
             const photoId = await createPhoto(photo, token)
             const payload = {
@@ -99,6 +98,7 @@ export default function newPostForm() {
                 type,
                 review,
                 style,
+                like: [],
                 price,
                 photo: [photoId],
             };

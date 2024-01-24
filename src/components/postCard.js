@@ -1,4 +1,8 @@
 import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Text, Body1, Image, Label, shorthands, Avatar} from "@fluentui/react-components"
+import { useContext, useState, useEffect } from "react"
+import { AuthContext } from "./providers/AuthProvider"
+import { likePost, unlikePost } from "@/services/post-service"
+
 
 const useStyles = makeStyles({
 	card: {
@@ -23,7 +27,46 @@ const useStyles = makeStyles({
 
 export default function PostCard({ post }) {
 	const styles = useStyles()
+	const { user, getToken } = useContext(AuthContext)
+	const [like, setLike] = useState(false);
 
+	useEffect(() => {
+	  if (post && user) {
+		setLike(post.like.includes(user.id));
+	  }
+	}, [post, user])
+
+	console.log(post)
+
+	const handleLike = async() => {
+		const userId = user?.id
+		const postId = post._id
+		const token = getToken()
+
+		const response = await likePost(postId, userId, token)
+		
+		if(response.message === "Post liked successfully") {
+			setLike(true)
+		}
+	}
+
+	const handleUnlike = async() => {
+		const userId = user?.id
+		const postId = post._id
+		const token = getToken()
+		console.log(`postId: ${postId}, userId: ${userId}, token: ${token}`)
+		
+		console.log("Trying to unlike post...");
+	
+		const response = await unlikePost(postId, userId, token)
+	
+		console.log(response.message)
+		if(response.message === "Post unliked successfully"){
+			setLike(false)
+		}
+	}
+	
+	
 	return (
 		<Card className={styles.card} size="large">
 			<CardHeader
@@ -46,8 +89,15 @@ export default function PostCard({ post }) {
 					<Label>{`$${post.price}`}</Label>
 				</div>
 				<div className={styles.row}>
-					<Image src="/orange_heart_high_contrast.svg"/>
-					<Image src="/orange_heart_flat.svg"/>
+					{like === false ? (
+						<Image 
+							onClick={() => handleLike()}
+							src="/orange_heart_high_contrast.svg"/>
+						) : (
+						<Image
+							onClick={() => handleUnlike()}
+							src="/orange_heart_flat.svg"/>
+					)}
 				</div>
 				<Text className="review_text">{post.review}</Text>
 			</CardFooter>

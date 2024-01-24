@@ -95,12 +95,10 @@ export default function Login() {
                     setUsername("")
                     setPassword("")
                 }
-            } else {
-                setErrorMessage("Please enter both username and password.")
             }
         } catch (error) {
             console.error("Error during login:", error);
-            setErrorMessage("An unexpected error occurred. Please try again later.")
+
         }
     }
 
