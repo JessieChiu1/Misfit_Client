@@ -38,6 +38,7 @@ export default function PostCard({ post }) {
 
 	console.log(post)
 
+	//I manually do setLike for these 2 function because I don't want to trigger a page refresh on liking/unliking post
 	const handleLike = async() => {
 		const userId = user?.id
 		const postId = post._id

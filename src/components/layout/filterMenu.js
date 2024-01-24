@@ -50,28 +50,37 @@ export default function FilterMenu({ style }) {
 					<MenuItemLink href={`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}`} key="All">
 						<Subtitle2>All</Subtitle2>
 					</MenuItemLink>
-					{optionList.map((option) => (
+					{optionList.map((option, index) => (
 						option.label ? (
-							<Menu>
-								<MenuTrigger disableButtonEnhancement>
-									<MenuItem><Subtitle2>{option.label}</Subtitle2></MenuItem>
-								</MenuTrigger>
-								<MenuPopover>
-									<MenuList>
-										{option[style]?.map((item) => (
-											<MenuItemLink href={`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}?type=${item}`} key={item}>
-											<Subtitle2>{item}</Subtitle2>
-										</MenuItemLink>
-										))}
-									</MenuList>
-								</MenuPopover>
+							<Menu key={index}>
+							<MenuTrigger disableButtonEnhancement>
+								<MenuItem>
+								<Subtitle2>{option.label}</Subtitle2>
+								</MenuItem>
+							</MenuTrigger>
+							<MenuPopover>
+								<MenuList>
+								{option[style]?.map((item) => (
+									<MenuItemLink
+									href={`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}?type=${item}`}
+									key={`${option.label}_${item}`}
+									>
+									<Subtitle2>{item}</Subtitle2>
+									</MenuItemLink>
+								))}
+								</MenuList>
+							</MenuPopover>
 							</Menu>
 						) : (
-							<MenuItemLink href={`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}?type=${option}`} key={option}>
-								<Subtitle2>{option}</Subtitle2>
+							<MenuItemLink
+							href={`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}?type=${option}`}
+							key={option}
+							>
+							<Subtitle2>{option}</Subtitle2>
 							</MenuItemLink>
 						)
-					))}
+						))}
+
 				</MenuList>
 			</MenuPopover>
 		</Menu>
