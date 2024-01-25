@@ -21,7 +21,6 @@ export default function Home() {
 	const styles = useStyles()
 	const { allPost, isLoading } = usePostByStyle("")
 	const [pagePost, setPagePost] = useState([])
-	const [sortBy, setSortBy] = useState()
 	const [currentPage, setCurrentPage] = useState(0)
 
 	useEffect(() => {
@@ -39,7 +38,7 @@ export default function Home() {
 		}
 	
 		createSubPageArray(allPost, 10)
-	}, [sortBy, allPost])
+	}, [allPost])
 	
 	const handleLoadMore = () => {
 		setCurrentPage(currentPage + 1)

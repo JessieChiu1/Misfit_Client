@@ -27,7 +27,6 @@ export default function PostList() {
 	const { allPost, isLoading } = usePostByStyle(style, type)
 
 	const [pagePost, setPagePost] = useState([])
-	const [sortBy, setSortBy] = useState()
 	const [currentPage, setCurrentPage] = useState(0)
 
 
@@ -46,7 +45,7 @@ export default function PostList() {
 	}
 
 	createSubPageArray(allPost, 10)
-	}, [sortBy, allPost])
+	}, [allPost])
 
 	const handleLoadMore = () => {
 		setCurrentPage(currentPage + 1)
