@@ -1,5 +1,5 @@
 import { LineHorizontal3Filled } from "@fluentui/react-icons"
-import { Menu, MenuTrigger, MenuList, MenuItemLink, MenuPopover, Button, Label, makeStyles, shorthands } from "@fluentui/react-components"
+import { Menu, MenuTrigger, MenuList, MenuItemLink, MenuPopover, Button, Text, makeStyles, shorthands } from "@fluentui/react-components"
 import { useContext } from "react"
 import { AuthContext } from "@/components/providers/AuthProvider"
 import { useRouter } from "next/router"
@@ -39,21 +39,21 @@ export default function ToggleMenu() {
 			{user ? (
 				<>
 					<MenuItemLink onClick={() => handleNavigation(`/user/${user.id}`)}>
-						<Label>Profile</Label>
+						<Text>Profile</Text>
 					</MenuItemLink>
 					<MenuItemLink onClick={() => handleNavigation("/createNewPost")}>
-						<Label>Create New Post</Label>
+						<Text>Create New Post</Text>
 					</MenuItemLink>
 				</>
 			) : (
 				<>
 					<MenuItemLink onClick={() => handleNavigation("/signup")}>
-						<Label>Signup or Login To Make A Post</Label>
+						<Text>Signup or Login To Make A Post</Text>
 					</MenuItemLink>
 				</>
 			)}
-				<MenuItemLink onClick={() => handleNavigation("/createNewPost")}>
-						<Label>About</Label>
+				<MenuItemLink onClick={() => handleNavigation("/about")}>
+						<Text>About</Text>
 				</MenuItemLink>
 			</MenuList>
 		</MenuPopover>

@@ -1,4 +1,5 @@
 import { makeStyles, Label, Link, Image, shorthands } from "@fluentui/react-components"
+import { useRouter } from "next/router"
 
 const useStyles = makeStyles({
     footer: {
@@ -37,23 +38,26 @@ const useStyles = makeStyles({
 })
 
 export default function Footer() {
-    const styles = useStyles()
+	const router = useRouter()
+	const styles = useStyles()
+
+	const handleNavigation = (route) => {
+		router.push(route)
+	}
 
     return (
         <footer className={styles.footer}>
             <section className={styles.subItem}>
                 <Label className={styles.label}>About</Label>
-                <Link>About Misfit</Link>
-                <Link>Report a Bug</Link>
-				<Link>FAQs</Link>
-				<Link>Misfit Guidelines</Link>
-				<Link>Future Features</Link>
+                <Link onClick={() => handleNavigation("/about")}>About Misfit</Link>
+				<Link onClick={() => handleNavigation("/FAQs")}>FAQs</Link>
+				<Link onClick={() => handleNavigation("/misfitGuidelines")}>Misfit Guidelines</Link>
+				<Link onClick={() => handleNavigation("/futureFeatures")}>Future Features</Link>
             </section>
 			<section className={styles.subItem}>
                 <Label className={styles.label}>Terms and Condition</Label>
                 <Link>Privacy Policy</Link>
                 <Link>Terms of Service</Link>
-				<Link>Newsletter Signup</Link>
 				<Link>Accessibility Information</Link>
             </section>
             <section className={styles.subItem}>

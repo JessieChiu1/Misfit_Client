@@ -20,7 +20,6 @@ const useStyles = makeStyles({
 export default function PostList() {
 	const cssStyles = useStyles()
     const router = useRouter()
-    console.log(router.query)
     const { style, type } = router.query
 
 	const { allPost } = usePostByStyle(style, type)

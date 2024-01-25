@@ -1,5 +1,6 @@
 import React from 'react';
-import { Menu, MenuTrigger, MenuPopover, MenuList, MenuItemLink, Button, Text, Subtitle2, makeStyles, shorthands, MenuItem } from "@fluentui/react-components";
+import { Menu, MenuTrigger, MenuPopover, MenuList, MenuItemLink, Button, Text, Subtitle2, makeStyles, shorthands, MenuItem } from "@fluentui/react-components"
+import { useRouter } from "next/router"
 
 const optionList = [
 	"Accessory",
@@ -36,7 +37,12 @@ button: {
 });
 
 export default function FilterMenu({ style }) {
-    const styles = useStyles()
+	const router = useRouter()
+	const styles = useStyles()
+
+	const handleNavigation = (route) => {
+		router.push(route)
+	}
 
     return (
 		<Menu>
@@ -47,7 +53,7 @@ export default function FilterMenu({ style }) {
 			</MenuTrigger>
 			<MenuPopover>
 				<MenuList>
-					<MenuItemLink href={`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}`} key="All">
+					<MenuItemLink onClick={() => handleNavigation(`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}`)} key="All">
 						<Subtitle2>All</Subtitle2>
 					</MenuItemLink>
 					{optionList.map((option, index) => (
@@ -62,7 +68,7 @@ export default function FilterMenu({ style }) {
 								<MenuList>
 								{option[style]?.map((item) => (
 									<MenuItemLink
-									href={`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}?type=${item}`}
+									onClick={() => handleNavigation(`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}?type=${item}`)}
 									key={`${option.label}_${item}`}
 									>
 									<Subtitle2>{item}</Subtitle2>
@@ -73,7 +79,7 @@ export default function FilterMenu({ style }) {
 							</Menu>
 						) : (
 							<MenuItemLink
-							href={`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}?type=${option}`}
+							onClick={() => handleNavigation(`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}?type=${option}`)}
 							key={option}
 							>
 							<Subtitle2>{option}</Subtitle2>

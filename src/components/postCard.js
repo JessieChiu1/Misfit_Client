@@ -37,11 +37,13 @@ const useStyles = makeStyles({
 export default function PostCard({ post }) {
 	const styles = useStyles()
 	const { user, getToken } = useContext(AuthContext)
-	const [like, setLike] = useState(false);
+	const [like, setLike] = useState(false)
+	const [totalLike, setTotalLike] = useState(post.like.length)
+	console.log(post)
 
 	useEffect(() => {
 	  if (post && user) {
-		setLike(post.like.includes(user.id));
+		setLike(post.like.includes(user.id))
 	  }
 	}, [post, user])
 
@@ -55,6 +57,8 @@ export default function PostCard({ post }) {
 		
 		if(response.message === "Post liked successfully") {
 			setLike(true)
+			const newTotal = totalLike + 1
+			setTotalLike(newTotal)
 		}
 	}
 
@@ -71,9 +75,21 @@ export default function PostCard({ post }) {
 		console.log(response.message)
 		if(response.message === "Post unliked successfully"){
 			setLike(false)
+			const newTotal = totalLike - 1
+			setTotalLike(newTotal)
 		}
 	}
 	
+	function getLikeText(totalLike, like) {
+		if (totalLike === 0){
+			return "0 like"
+		}
+		if (like) {
+			return totalLike === 1 ? "You like this post" : `You and ${totalLike - 1} ${totalLike - 1 === 1 ? "person" : "people"} like this post`
+		} else {
+			return totalLike === 1 ? "1 person likes this post" : `${totalLike} people like this post`;
+		}
+	}
 	
 	return (
 		<Card className={styles.card} size="large">
@@ -107,7 +123,7 @@ export default function PostCard({ post }) {
 								onClick={() => handleUnlike()}
 								src="/orange_heart_flat.svg"/>
 					)}
-					<Text size={500}>{`${post.like.length} ${post.like.length === 1 ? "person" : "people"} like this post`}</Text>
+					<Text size={500}>{getLikeText(totalLike, like)}</Text>
 				</div>
 				<Text size={600} className="review_text">{post.review}</Text>
 			</CardFooter>
