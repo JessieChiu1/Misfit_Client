@@ -65,7 +65,7 @@ return (
 		allPost.map((post) => (
 			<div key={post._id}>
 			{editPost && editPost._id === post._id ? (
-				<EditPostForm post={editPost} />
+				<EditPostForm post={editPost} setEditPost={setEditPost}/>
 			) : (
 				<div>
 				<PostCard size="large" post={post} />

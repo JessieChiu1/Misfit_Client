@@ -19,10 +19,19 @@ const useStyles = makeStyles({
 	},
 	row: {
 		display: "flex",
+		justifyContent: "space-between",
+		alignContent: "center",
 		"> *": {
 			marginRight: "10px",
 		},
 	},
+	like_row: {
+		display: "flex",
+		alignContent: "center",
+		"> *": {
+			marginRight: "10px",
+		},
+	}
 })
 
 export default function PostCard({ post }) {
@@ -35,8 +44,6 @@ export default function PostCard({ post }) {
 		setLike(post.like.includes(user.id));
 	  }
 	}, [post, user])
-
-	console.log(post)
 
 	//I manually do setLike for these 2 function because I don't want to trigger a page refresh on liking/unliking post
 	const handleLike = async() => {
@@ -74,7 +81,7 @@ export default function PostCard({ post }) {
 				image={<Avatar name={post.user.username} />}
                 header={
                     <Body1>
-                        <Label size="large">{post.title}</Label>
+                        <Text size={700}>{post.title}</Text>
                     </Body1>
                 }
 			/>
@@ -86,21 +93,23 @@ export default function PostCard({ post }) {
 			</CardPreview>
 			<CardFooter className={styles.content}>
 				<div className={styles.row}>
-					<Label>{post.type}</Label>
-					<Label>{`$${post.price}`}</Label>
+					<Text size={500}>{post.style}</Text>
+					<Text size={500}>{post.type}</Text>
+					<Text size={500}>{`$${post.price}`}</Text>
 				</div>
-				<div className={styles.row}>
+				<div className={styles.like_row}>
 					{like === false ? (
-						<Image 
-							onClick={() => handleLike()}
-							src="/orange_heart_high_contrast.svg"/>
+							<Image 
+								onClick={() => handleLike()}
+								src="/orange_heart_high_contrast.svg"/>
 						) : (
-						<Image
-							onClick={() => handleUnlike()}
-							src="/orange_heart_flat.svg"/>
+							<Image
+								onClick={() => handleUnlike()}
+								src="/orange_heart_flat.svg"/>
 					)}
+					<Text size={500}>{`${post.like.length} ${post.like.length === 1 ? "person" : "people"} like this post`}</Text>
 				</div>
-				<Text className="review_text">{post.review}</Text>
+				<Text size={600} className="review_text">{post.review}</Text>
 			</CardFooter>
 	  	</Card>
 	)

@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 import { createPhoto } from '@/services/photo-service'
 import { createPost } from '@/services/post-service'
 
-const optionList = ["Outfit Showcase","Activewear", "Coats", "Jackets & Blazers", "Suits & Separates", "Dresses", "Jeans & Denim", "Loungewear", "Pants & Leggings", "Skirts", "Sleepwear", "Sweaters", "Sweatshirts & Hoodies", "Swimsuits & Cover-Ups", "T-Shirt and Tops", "Shoes", "Accessory", "Underwear", "Bra", "Shorts", "Swimwear", "Dress Shirt", "Blouses", "Jumpsuits & Rompers"]
+const optionList = ["Accessory", "Activewear", "Blouses", "Bra", "Coats", "Dress Pants", "Dress Shirt", "Dresses", "Jackets & Blazers", "Jeans & Denim", "Loungewear", "Outfit Showcase", "Pants & Leggings", "Shoes", "Shorts", "Skirts", "Sleepwear", "Suits & Separates", "Sweaters", "Sweatshirts & Hoodies", "Swimwear", "T-Shirt", "Underwear"]
 
 const useStyles = makeStyles({
     form_container: {
@@ -89,7 +89,6 @@ export default function newPostForm() {
 
     const handleSubmit = async (e) => {
         try {
-            console.log("click")
             e.preventDefault();
             const token = getToken()
             const photoId = await createPhoto(photo, token)

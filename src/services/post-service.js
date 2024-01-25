@@ -77,7 +77,6 @@ export const likePost = async(postId, userId, token) => {
 }
 
 export const unlikePost = async(postId, userId, token) => {
-	console.log("trigger unlike")
 	const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/api/v1/post/${postId}/${userId}/unlike`, {
 		method: "PUT",
 		headers: {
@@ -86,6 +85,22 @@ export const unlikePost = async(postId, userId, token) => {
 		},
 	})
 
+	const data = await response.json()
+	return data
+}
+
+//edit Post
+export const editPost = async(payload, postId, token) => {
+	console.log("triggering edit post")
+	const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/api/v1/post/${postId}`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify(payload)
+	})
+	
 	const data = await response.json()
 	return data
 }
