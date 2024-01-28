@@ -2,6 +2,8 @@ import React from 'react';
 import { Menu, MenuTrigger, MenuPopover, MenuList, MenuItemLink, Button, Text, Subtitle2, makeStyles, shorthands, MenuItem } from "@fluentui/react-components"
 import { useRouter } from "next/router"
 
+import { ChevronDown24Regular } from "@fluentui/react-icons"
+
 const optionList = [
 	"Accessory",
 	"Activewear",
@@ -45,10 +47,11 @@ export default function FilterMenu({ style }) {
 	}
 
     return (
-		<Menu>
+		<Menu
+		openOnHover="true">
 			<MenuTrigger disableButtonEnhancement>
 				<Button appearance='transparent' className={styles.button}>
-                    <Text size={600}>{style}</Text>
+                    <Text size={600}>{style}<ChevronDown24Regular/></Text>
                 </Button>
 			</MenuTrigger>
 			<MenuPopover>
