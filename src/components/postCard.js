@@ -39,7 +39,6 @@ export default function PostCard({ post }) {
 	const { user, getToken } = useContext(AuthContext)
 	const [like, setLike] = useState(false)
 	const [totalLike, setTotalLike] = useState(post.like.length)
-	console.log(post)
 
 	useEffect(() => {
 	  if (post && user) {
@@ -105,6 +104,7 @@ export default function PostCard({ post }) {
 				<Image
 					src={post.photo[0].mainUrl}
 					alt="Example"
+					loading="lazy"
 				/>
 			</CardPreview>
 			<CardFooter className={styles.content}>
@@ -125,7 +125,7 @@ export default function PostCard({ post }) {
 					)}
 					<Text size={500}>{getLikeText(totalLike, like)}</Text>
 				</div>
-				<Text size={600} className="review_text">{post.review}</Text>
+				<Text size={600} className="review_text"><div dangerouslySetInnerHTML={{ __html: post.review }} /></Text>
 			</CardFooter>
 	  	</Card>
 	)

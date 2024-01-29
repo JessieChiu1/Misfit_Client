@@ -20,7 +20,7 @@ export const usePostByStyle = (style, type = undefined) => {
 		}
 
 		if (Array.isArray(data)) {
-			setPost(data)
+			setPost(data.reverse())
 		} else {
 			setPost([])
 		}
@@ -50,7 +50,7 @@ export const usePostByUserId = (userId) => {
 		const data = await postService.getPostByUserId(userId)
 
 		if (Array.isArray(data)) {
-			setPost(data)
+			setPost(data.reverse())
 		} else {
 			setPost([])
 		}

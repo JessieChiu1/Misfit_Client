@@ -4,6 +4,8 @@ import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Input, Body1, Im
 import { useRouter } from "next/router"
 import { createPhoto } from '@/services/photo-service'
 import { editPost } from '@/services/post-service'
+import { useEditor, EditorContent } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
 
 const optionList = ["Accessory", "Activewear", "Blouses", "Bra", "Coats", "Dress Pants", "Dress Shirt", "Dresses", "Jackets & Blazers", "Jeans & Denim", "Loungewear", "Outfit Showcase", "Pants & Leggings", "Shoes", "Shorts", "Skirts", "Sleepwear", "Suits & Separates", "Sweaters", "Sweatshirts & Hoodies", "Swimwear", "T-Shirt", "Underwear"]
 
@@ -41,9 +43,6 @@ const useStyles = makeStyles({
 		...shorthands.margin("20px"),
 	  	minWidth: "300px",
 	},
-	review_text: {
-		whiteSpace: "pre-line",
-	},
 	content: {
 		display: "flex",
 		flexDirection: "column",
@@ -80,6 +79,18 @@ export default function EditPostForm({ post, setEditPost }) {
     const [price, setPrice] = useState(post.price)
     const [photo, setPhoto] = useState(post.photo[0].mainUrl)
     const [photoChanged, setPhotoChanged] = useState(false)
+
+    const editor = useEditor({
+        extensions: [
+            StarterKit
+        ],
+        content: post.review,
+        onUpdate: ({ editor }) => {
+            const formattedReview = editor.getHTML().replace(`</p><p>`, '</p><br/><p>')
+            setReview(formattedReview)
+            console.log(formattedReview)
+        },
+    })
 
     const handleSubmit = async (e) => {
         try {
@@ -125,10 +136,6 @@ export default function EditPostForm({ post, setEditPost }) {
 
     const handleChangeType = (e) => {
         setType(e.target.value);
-    }
-
-    const handleChangeReview = (e) => {
-        setReview(e.target.value);
     }
 
     const handleChangeStyle = (e) => {
@@ -212,15 +219,7 @@ export default function EditPostForm({ post, setEditPost }) {
 							/>
 							<Button onClick={() => handleRemovePhoto()}>Remove Photo</Button>
 						</div>
-                        <Textarea 
-							className={styles.textArea}
-                            type="text"
-                            name="review"
-							resize='vertical'
-                            placeholder={`Please describe the item you are showcasing.\nIf possible, include the brand name and why this item is a great find!\nDoes it fit your shoulder or hip?\nDoes it hide your curve?`}
-                            value={review}
-                            onChange={handleChangeReview}
-                        />
+                        <EditorContent editor={editor} />
                     </CardFooter>
                 </Card>
                 <div className={styles.buttonContainer}>
