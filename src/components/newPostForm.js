@@ -1,6 +1,6 @@
 import { useState, useContext, useCallback } from 'react'
 import { AuthContext } from './providers/AuthProvider'
-import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Input, Body1, Image, Label, shorthands, Avatar, Select, SpinButton, Textarea, Button} from "@fluentui/react-components" 
+import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Input, Body1, Image, Label, shorthands, Avatar, Select, SpinButton, Button} from "@fluentui/react-components" 
 import { useRouter } from "next/router"
 import { createPhoto } from '@/services/photo-service'
 import { createPost } from '@/services/post-service'
@@ -74,7 +74,7 @@ const useStyles = makeStyles({
     },
 })
 
-export default function newPostForm() {
+export default function NewPostForm() {
     const { user, getToken } = useContext(AuthContext)
     const router = useRouter()
     const styles = useStyles()
