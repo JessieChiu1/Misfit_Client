@@ -117,11 +117,13 @@ export default function PostCard({ post }) {
 					{like === false ? (
 							<Image 
 								onClick={() => handleLike()}
-								src="/orange_heart_high_contrast.svg"/>
+								src="/orange_heart_high_contrast.svg"
+								alt=""/>
 						) : (
 							<Image
 								onClick={() => handleUnlike()}
-								src="/orange_heart_flat.svg"/>
+								src="/orange_heart_flat.svg"
+								alt=""/>
 					)}
 					<Text size={500}>{getLikeText(totalLike, like)}</Text>
 				</div>
