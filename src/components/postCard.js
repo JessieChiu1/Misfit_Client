@@ -1,7 +1,9 @@
-import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Text, Body1, Image, Label, shorthands, Avatar} from "@fluentui/react-components"
+import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Text, Body1, Image, shorthands, Avatar} from "@fluentui/react-components"
 import { useContext, useState, useEffect } from "react"
 import { AuthContext } from "./providers/AuthProvider"
 import { likePost, unlikePost } from "@/services/post-service"
+import { Comment28Regular } from "@fluentui/react-icons"
+import Comment from "./comment"
 
 
 const useStyles = makeStyles({
@@ -28,9 +30,20 @@ const useStyles = makeStyles({
 	like_row: {
 		display: "flex",
 		alignContent: "center",
+		justifyContent: "space-between",
+	},
+	like: {
+		display: "flex",
+		alignContent: "center",
+		justifyContent: "flex-start",
 		"> *": {
 			marginRight: "10px",
-		},
+		}
+	},
+	comment: {
+		display: "flex",
+		alignContent: "center",
+		justifyContent: "center",
 	}
 })
 
@@ -39,6 +52,7 @@ export default function PostCard({ post }) {
 	const { user, getToken } = useContext(AuthContext)
 	const [like, setLike] = useState(false)
 	const [totalLike, setTotalLike] = useState(post.like.length)
+	const [commentOpen, setCommentOpen] = useState(false)
 
 	useEffect(() => {
 	  if (post && user) {
@@ -89,8 +103,13 @@ export default function PostCard({ post }) {
 			return totalLike === 1 ? "1 person likes this post" : `${totalLike} people like this post`;
 		}
 	}
+
+	const handleComment = async() => {
+		setCommentOpen(true)
+	}
 	
 	return (
+		<div>
 		<Card className={styles.card} size="large">
 			<CardHeader
 				image={<Avatar name={post.user.username} />}
@@ -114,21 +133,26 @@ export default function PostCard({ post }) {
 					<Text size={500}>{`$${post.price}`}</Text>
 				</div>
 				<div className={styles.like_row}>
-					{like === false ? (
-							<Image 
-								onClick={() => handleLike()}
-								src="/orange_heart_high_contrast.svg"
-								alt=""/>
-						) : (
-							<Image
-								onClick={() => handleUnlike()}
-								src="/orange_heart_flat.svg"
-								alt=""/>
-					)}
-					<Text size={500}>{getLikeText(totalLike, like)}</Text>
-				</div>
+					<div className={styles.like}>
+						{like === false ? (
+								<Image 
+									onClick={() => handleLike()}
+									src="/orange_heart_high_contrast.svg"
+									alt=""/>
+							) : (
+								<Image
+									onClick={() => handleUnlike()}
+									src="/orange_heart_flat.svg"
+									alt=""/>
+						)}
+						<Text size={500}>{getLikeText(totalLike, like)}</Text>
+					</div>
+					<Comment28Regular className={styles.comment} onClick={handleComment}/>
+					</div>
 				<Text size={600} className="review_text"><div dangerouslySetInnerHTML={{ __html: post.review }} /></Text>
 			</CardFooter>
 	  	</Card>
+		{commentOpen && <Comment postId={post._id} />}
+		</div>
 	)
 }

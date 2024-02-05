@@ -91,7 +91,6 @@ export const unlikePost = async(postId, userId, token) => {
 
 //edit Post
 export const editPost = async(payload, postId, token) => {
-	console.log("triggering edit post")
 	const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/api/v1/post/${postId}`, {
 		method: "PUT",
 		headers: {
@@ -102,5 +101,14 @@ export const editPost = async(payload, postId, token) => {
 	})
 	
 	const data = await response.json()
+	return data
+}
+
+export const getCommentByPostId = async(postId) => {
+	const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/api/v1/post/comment/${postId}`, {
+		method: "GET",
+	})
+	const data = await response.json()
+	console.log(data)
 	return data
 }
