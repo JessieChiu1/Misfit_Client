@@ -73,7 +73,7 @@ export default function Comment({ postId }) {
 				user: user.id,
 				body: commentBody,
 				parent: postId,
-				upvote: [user._id]
+				upvote: [user.id]
 			}
 			const response = await createRootComment(payload, token)
 			if(response._id){
