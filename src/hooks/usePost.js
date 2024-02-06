@@ -41,6 +41,7 @@ export const usePostByStyle = (style, type = undefined) => {
 export const usePostByUserId = (userId) => {
 	const [allPost, setPost] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
+	const [change, setChange] = useState(false)
 
 	useEffect(() => {
 	const fetchData = async () => {
@@ -55,16 +56,20 @@ export const usePostByUserId = (userId) => {
 			setPost([])
 		}
 		} catch (error) {
-		console.error('Error fetching posts:', error)
-		setPost([])
+			console.error('Error fetching posts:', error)
+			setPost([])
 		} finally {
-		setIsLoading(false);
+			setIsLoading(false)
 		}
 	}
 
 	fetchData()
-	}, [userId])
+	}, [userId, change])
 
-	return { allPost, isLoading }
+	const madeChanges = () => {
+		setChange((boo) => !boo)
+	}
+
+	return { allPost, isLoading, madeChanges}
 	
 }

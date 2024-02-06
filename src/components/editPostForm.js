@@ -1,6 +1,6 @@
 import { useState, useContext, useCallback } from 'react'
 import { AuthContext } from './providers/AuthProvider'
-import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Input, Body1, Image, Label, shorthands, Avatar, Select, SpinButton, Textarea, Button} from "@fluentui/react-components" 
+import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Input, Body1, Image, Label, shorthands, Avatar, Select, SpinButton, Button} from "@fluentui/react-components" 
 import { useRouter } from "next/router"
 import { createPhoto } from '@/services/photo-service'
 import { editPost } from '@/services/post-service'
@@ -67,9 +67,8 @@ const useStyles = makeStyles({
     },
 })
 
-export default function EditPostForm({ post, setEditPost }) {
+export default function EditPostForm({ post, setEditPost, madeChanges }) {
     const { user, getToken } = useContext(AuthContext)
-    const router = useRouter()
     const styles = useStyles()
 
     const [title, setTitle] = useState(post.title)
@@ -116,10 +115,10 @@ export default function EditPostForm({ post, setEditPost }) {
                     price,
                 }
             }
-            console.log(payload)
             const response = await editPost(payload, post._id, token)
             if (response.message === "Post Updated successfully") {
-				router.reload()
+				madeChanges()
+                setEditPost(null)
 			}
         } catch (e) {
             console.log(e)
@@ -144,7 +143,6 @@ export default function EditPostForm({ post, setEditPost }) {
 
     const handleChangePrice = useCallback(
 		(_ev, data) => {
-		  console.log("onSpinButtonChange", data.value);
 		  if (data.value !== undefined) {
 			setPrice(data.value);
 		  } 

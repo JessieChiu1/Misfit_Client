@@ -1,29 +1,48 @@
 import { useCommentByPostId } from "@/hooks/useComment"
-import { Button, Spinner, Text } from "@fluentui/react-components"
+import { Button, Spinner, Text, makeStyles, shorthands } from "@fluentui/react-components"
 import { useEditor, EditorContent } from "@tiptap/react"
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
-import { useState, useEffect, useContext } from "react"
+import { useState, useContext } from "react"
 import SingleCommentCard from "./singleCommentCard"
 import { AuthContext } from './providers/AuthProvider'
 import { createRootComment } from "@/services/comment-service"
-const { min } = Math
+
+const useStyles = makeStyles({
+	container: {
+		...shorthands.padding("20px"),
+		overflowY: "scroll",
+		width: "500px",
+		maxHeight: "1000px"
+	},
+	form: {
+		display: "flex",
+		width: "100%",
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	button: {
+        width: "fit-content",
+		height: "fit-content"
+	},
+	editor: {
+		width: "80%"
+	},
+	review_text: {
+		whiteSpace: "pre-line",
+	},
+	text: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+	}
+})
 
 export default function Comment({ postId }) {
+	const styles = useStyles()
 	const { user, getToken } = useContext(AuthContext)
 	const [commentBody, setCommentBody] = useState("")
-	const [indexShown, setIndexShown] = useState(0)
-	const { allComment, isLoading } = useCommentByPostId(postId)
-
-	console.log(allComment, isLoading)
-	
-	useEffect(() => {
-		if (allComment.length < 10) {
-		  setIndexShown(allComment.length)
-		} else {
-		  setIndexShown(10)
-		}
-	}, [allComment])
+	const { allComment, isLoading, addComment } = useCommentByPostId(postId)
 
 	const editor = useEditor({
 		extensions: [
@@ -36,59 +55,54 @@ export default function Comment({ postId }) {
 		const formattedReview = editor
 			.getHTML()
 			.replace(`</p><p>`, "</p><br/><p>");
-			setCommentBody(formattedReview);
+			setCommentBody(formattedReview)
 		},
 	})
-
-	const handleLoadMore = () => {
-		const newIndex = min(allComment.length, indexShown + 10);
-		setIndexShown(newIndex);
-	}
 
 	const handleSubmit = async(e) => {
 		try {
 			e.preventDefault()
+			const trimComment = commentBody.replaceAll("<p>", "").replaceAll("</p>","").replaceAll("<br/>", "").trim()
+			if(trimComment === ""){
+				console.log("please write something")
+				return
+			}
+			
 			const token = getToken()
 			const payload = {
 				user: user.id,
 				body: commentBody,
 				parent: postId,
+				upvote: [user._id]
 			}
 			const response = await createRootComment(payload, token)
-			console.log(response)
+			if(response._id){
+				addComment()
+				setCommentBody("")
+				editor.commands.setContent('')
+			}
 		} catch (e) {
 			console.log(e)
 		}
 	}
 
 return (
-	<div>
-	<form onSubmit={handleSubmit}>
-		<EditorContent editor={editor} />
-		<Button appearance="primary" type="submit">Submit Comment</Button>
-	</form>
-	<div>
+	<div className={styles.container}>
+		<form onSubmit={handleSubmit} className={styles.form}>
+			<EditorContent editor={editor} className={styles.editor}/>
+			<Button appearance="primary" type="submit">Submit Comment</Button>
+		</form>
 		{isLoading ? (
 			<Spinner size="large" />
 			) : allComment.length > 0 ? (
-			allComment.slice(0, indexShown + 1).flat().map((comment) => (
+			allComment.map((comment) => (
 				<SingleCommentCard comment={comment} key={comment._id} />
 			))
 			) : (
-			<Text size={500} >
+			<Text size={500} className={styles.text}>
 				No Comment here yet
 			</Text>
 			)}
-			{allComment.length > indexShown + 1 && (
-			<Button
-				size="large"
-				appearance="primary"
-				onClick={handleLoadMore}
-			>
-				Load More
-			</Button>
-		)}
-		</div>
 	</div>
 )
 }

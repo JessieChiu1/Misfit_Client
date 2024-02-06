@@ -1,14 +1,14 @@
-import { useRouter } from "next/router";
-import { usePostByUserId } from "@/hooks/usePost";
-import PostCard from "@/components/postCard";
-import Header from "@/components/layout/header";
-import Footer from "@/components/layout/footer";
-import { makeStyles, shorthands, Spinner, Label, Button } from "@fluentui/react-components";
-import { AuthContext } from "@/components/providers/AuthProvider";
-import { useContext } from "react";
-import { deletePost } from "@/services/post-service";
-import EditPostForm from "@/components/editPostForm";
-import { useState } from "react";
+import { useRouter } from "next/router"
+import { usePostByUserId } from "@/hooks/usePost"
+import PostCard from "@/components/postCard"
+import Header from "@/components/layout/header"
+import Footer from "@/components/layout/footer"
+import { makeStyles, shorthands, Spinner, Label, Button } from "@fluentui/react-components"
+import { AuthContext } from "@/components/providers/AuthProvider"
+import { useContext } from "react"
+import { deletePost } from "@/services/post-service"
+import EditPostForm from "@/components/editPostForm"
+import { useState } from "react"
 
 const useStyles = makeStyles({
 container: {
@@ -32,7 +32,7 @@ const styles = useStyles();
 const { userId } = router.query;
 const { user, getToken } = useContext(AuthContext);
 
-const { allPost, isLoading } = usePostByUserId(userId);
+const { allPost, isLoading, madeChanges } = usePostByUserId(userId)
 
 const [editPost, setEditPost] = useState(null);
 
@@ -41,7 +41,7 @@ const handleDeletePost = async (postId) => {
 	const token = getToken();
 	const response = await deletePost(postId, token);
 	if (response.message === "Deleted Post") {
-		router.reload();
+		madeChanges()
 	}
 	} catch (e) {
 	console.log(e);
@@ -49,8 +49,7 @@ const handleDeletePost = async (postId) => {
 };
 
 const handleEditPostForm = (post) => {
-	setEditPost(post);
-	console.log(post);
+	setEditPost(post)
 };
 
 return (
@@ -65,7 +64,7 @@ return (
 		allPost.map((post) => (
 			<div key={post._id}>
 			{editPost && editPost._id === post._id ? (
-				<EditPostForm post={editPost} setEditPost={setEditPost}/>
+				<EditPostForm post={editPost} setEditPost={setEditPost} madeChanges={madeChanges}/>
 			) : (
 				<div>
 				<PostCard size="large" post={post} />

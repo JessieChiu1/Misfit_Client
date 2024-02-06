@@ -1,5 +1,10 @@
 # Misfit Client
 
+The client is hosted via Vercel. I will be using branches to work on new features before merging with the main branch.
+
+You can check out the deployed website so far [here](https://www.misfit.fashion/).
+
+
 ## Setting up .env file 
 Your `.env.local` file should look something like this:
 
