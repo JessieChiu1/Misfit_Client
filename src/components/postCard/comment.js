@@ -38,7 +38,7 @@ const useStyles = makeStyles({
 	}
 })
 
-export default function Comment({ postId }) {
+export default function Comment({ postId, OP }) {
 	const styles = useStyles()
 	const { user, getToken } = useContext(AuthContext)
 	const [commentBody, setCommentBody] = useState("")
@@ -72,6 +72,7 @@ export default function Comment({ postId }) {
 			const payload = {
 				user: user.id,
 				body: commentBody,
+				rightToDelete: [user.id, OP],
 				parent: postId,
 				upvote: [user.id]
 			}

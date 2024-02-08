@@ -2,7 +2,7 @@ import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Text, Body1, Ima
 import { useContext, useState, useEffect } from "react"
 import { AuthContext } from "../providers/AuthProvider"
 import { likePost, unlikePost } from "@/services/post-service"
-import { Comment28Regular, CommentOff24Regular, Heart28Regular, Heart28Filled } from "@fluentui/react-icons"
+import { Comment24Regular, CommentOff24Regular, Heart28Regular, Heart28Filled } from "@fluentui/react-icons"
 import Comment from "./comment"
 
 
@@ -146,13 +146,13 @@ export default function PostCard({ post }) {
 						{commentOpen ? (
 							<CommentOff24Regular className={styles.comment} onClick={handleComment}/>
 						) : (
-							<Comment28Regular className={styles.comment} onClick={handleComment}/>
+							<Comment24Regular className={styles.comment} onClick={handleComment}/>
 						)}
 					</div>
 					<Text size={600} className="review_text"><div dangerouslySetInnerHTML={{ __html: post.review }} /></Text>
 				</CardFooter>
 			</Card>
-			{commentOpen && <Comment postId={post._id}/>}
+			{commentOpen && <Comment postId={post._id} OP={post.user._id}/>}
 		</div>
 	)
 }
