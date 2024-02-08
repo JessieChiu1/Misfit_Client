@@ -4,7 +4,7 @@ import * as postService from "../services/post-service"
 export const usePostByStyle = (style, type = undefined) => {
 	const [allPost, setPost] = useState([])
 	const [isLoading, setLoading] = useState(true)
-	const [error, setError] = useState(null)
+	const [change, setChange] = useState(false)
 
 	useEffect(() => {
 	const fetchData = async () => {
@@ -25,17 +25,20 @@ export const usePostByStyle = (style, type = undefined) => {
 			setPost([])
 		}
 		} catch (error) {
-		console.error('Error fetching posts:', error);
-		setError(error.message || 'An error occurred while fetching posts.');
+			console.error('Error fetching posts:', error);
 		} finally {
-		setLoading(false)
+			setLoading(false)
 		}
 	}
 
 	fetchData();
-	}, [style, type])
+	}, [style, type, change])
 
-	return { allPost, isLoading, error }
+	const madeChanges = () => {
+		setChange((boo) => !boo)
+	}
+
+	return { allPost, isLoading, madeChanges}
 }
 
 export const usePostByUserId = (userId) => {

@@ -63,8 +63,8 @@ export const getPostByUserId = async(userId) => {
 	return data
 }
 
-export const likePost = async(postId, userId, token) => {
-	const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/api/v1/post/${postId}/${userId}/like`, {
+export const likePost = async(postId, token) => {
+	const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/api/v1/post/${postId}/like`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -76,8 +76,8 @@ export const likePost = async(postId, userId, token) => {
 	return data
 }
 
-export const unlikePost = async(postId, userId, token) => {
-	const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/api/v1/post/${postId}/${userId}/unlike`, {
+export const unlikePost = async(postId, token) => {
+	const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/api/v1/post/${postId}/unlike`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -89,7 +89,6 @@ export const unlikePost = async(postId, userId, token) => {
 	return data
 }
 
-//edit Post
 export const editPost = async(payload, postId, token) => {
 	const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/api/v1/post/${postId}`, {
 		method: "PUT",

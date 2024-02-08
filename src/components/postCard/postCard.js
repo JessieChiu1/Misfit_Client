@@ -1,5 +1,5 @@
 import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Text, Body1, Image, Avatar, shorthands} from "@fluentui/react-components"
-import { useContext, useState, useEffect } from "react"
+import { useContext, useState } from "react"
 import { AuthContext } from "../providers/AuthProvider"
 import { likePost, unlikePost } from "@/services/post-service"
 import { Comment24Regular, CommentOff24Regular, Heart28Regular, Heart28Filled } from "@fluentui/react-icons"
@@ -54,55 +54,41 @@ const useStyles = makeStyles({
     },
 })
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, madeChanges }) {
 	const styles = useStyles()
 	const { user, getToken } = useContext(AuthContext)
-	const [like, setLike] = useState(false)
-	const [totalLike, setTotalLike] = useState(post.like.length)
 	const [commentOpen, setCommentOpen] = useState(false)
 
-	useEffect(() => {
-	  if (post && user) {
-		setLike(post.like.includes(user.id))
-	  }
-	}, [post, user])
-
 	const handleLike = async() => {
-		const userId = user?.id
 		const postId = post._id
 		const token = getToken()
 
-		const response = await likePost(postId, userId, token)
+		const response = await likePost(postId, token)
 		
 		if(response.message === "Post liked successfully") {
-			setLike(true)
-			const newTotal = totalLike + 1
-			setTotalLike(newTotal)
+			madeChanges()
 		}
 	}
 
 	const handleUnlike = async() => {
-		const userId = user?.id
 		const postId = post._id
 		const token = getToken()
 	
-		const response = await unlikePost(postId, userId, token)
+		const response = await unlikePost(postId, token)
 	
 		if(response.message === "Post unliked successfully"){
-			setLike(false)
-			const newTotal = totalLike - 1
-			setTotalLike(newTotal)
+			madeChanges()
 		}
 	}
 	
-	function getLikeText(totalLike, like) {
-		if (totalLike === 0){
+	function getLikeText(post) {
+		if (post.like.length === 0){
 			return "0 like"
 		}
-		if (like) {
-			return totalLike === 1 ? "You like this post" : `You and ${totalLike - 1} ${totalLike - 1 === 1 ? "person" : "people"} like this post`
+		if (post.like.includes(user.id)) {
+			return post.like.length === 1 ? "You like this post" : `You and ${post.like.length - 1} ${post.like.length - 1 === 1 ? "person" : "people"} like this post`
 		} else {
-			return totalLike === 1 ? "1 person likes this post" : `${totalLike} people like this post`;
+			return post.like.length === 1 ? "1 person likes this post" : `${post.like.length} people like this post`;
 		}
 	}
 
@@ -136,12 +122,12 @@ export default function PostCard({ post }) {
 					</div>
 					<div className={styles.like_row}>
 						<div className={styles.like}>
-							{like === false ? (
+							{post.like.includes(user.id) === false ? (
 								<Heart28Regular onClick={handleLike} />
 							) : (
 								<Heart28Filled onClick={handleUnlike} className={styles.heartIcon}/>
 							)}
-							<Text size={500}>{getLikeText(totalLike, like)}</Text>
+							<Text size={500}>{getLikeText(post)}</Text>
 						</div>
 						{commentOpen ? (
 							<CommentOff24Regular className={styles.comment} onClick={handleComment}/>

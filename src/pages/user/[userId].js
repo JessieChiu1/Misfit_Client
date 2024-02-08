@@ -67,7 +67,7 @@ return (
 				<EditPostForm post={editPost} setEditPost={setEditPost} madeChanges={madeChanges}/>
 			) : (
 				<div>
-				<PostCard size="large" post={post} />
+				<PostCard size="large" post={post} madeChanges={madeChanges}/>
 				{user && user.id === post.user ? (
 					<div className={styles.button_container}>
 					<Button appearance="primary" onClick={() => handleEditPostForm(post)}>
