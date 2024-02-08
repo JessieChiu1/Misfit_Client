@@ -85,7 +85,7 @@ export default function PostCard({ post, madeChanges }) {
 		if (post.like.length === 0){
 			return "0 like"
 		}
-		if (post.like.includes(user.id)) {
+		if (post.like.includes(user?.id)) {
 			return post.like.length === 1 ? "You like this post" : `You and ${post.like.length - 1} ${post.like.length - 1 === 1 ? "person" : "people"} like this post`
 		} else {
 			return post.like.length === 1 ? "1 person likes this post" : `${post.like.length} people like this post`;
@@ -122,7 +122,7 @@ export default function PostCard({ post, madeChanges }) {
 					</div>
 					<div className={styles.like_row}>
 						<div className={styles.like}>
-							{post.like.includes(user.id) === false ? (
+							{post.like.includes(user?.id) === false ? (
 								<Heart28Regular onClick={handleLike} />
 							) : (
 								<Heart28Filled onClick={handleUnlike} className={styles.heartIcon}/>

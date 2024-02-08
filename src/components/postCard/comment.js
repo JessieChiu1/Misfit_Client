@@ -35,6 +35,7 @@ const useStyles = makeStyles({
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
+		...shorthands.padding("20px")
 	}
 })
 
@@ -70,11 +71,11 @@ export default function Comment({ postId, OP }) {
 			
 			const token = getToken()
 			const payload = {
-				user: user.id,
+				user: user?.id,
 				body: commentBody,
-				rightToDelete: [user.id, OP],
+				rightToDelete: [user?.id, OP],
 				parent: postId,
-				upvote: [user.id]
+				upvote: [user?.id]
 			}
 			const response = await createRootComment(payload, token)
 			if(response._id){
@@ -90,8 +91,18 @@ export default function Comment({ postId, OP }) {
 return (
 	<div className={styles.container}>
 		<form onSubmit={handleSubmit} className={styles.form}>
-			<EditorContent editor={editor} className={styles.editor}/>
-			<Button appearance="primary" type="submit">Submit Comment</Button>
+			{user ? (
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <EditorContent editor={editor} className={styles.editor} />
+                    <Button appearance="primary" type="submit">
+                        Submit Comment
+                    </Button>
+                </form>
+            ) : (
+                <Text size={500} className={styles.text}>
+                    Please login to make a comment
+                </Text>
+            )}
 		</form>
 		{isLoading ? (
 			<Spinner size="large" />

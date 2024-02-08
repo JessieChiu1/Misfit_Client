@@ -97,12 +97,12 @@ export default function SingleCommentCard({ comment, madeChangesComment}) {
 			<CardFooter className={styles.footer}>
 				<div className={styles.vote}>
 					<Text size={200} weight="bold">{() => totalVote(comment)}</Text>
-					{comment.upvote.includes(user.id) ? (
+					{comment.upvote.includes(user?.id) ? (
 						<ThumbLike16Filled onClick={handleUpvote}/>
 					) : (
 						<ThumbLike16Regular onClick={handleUpvote}/>
 					) }
-					{comment.downvote.includes(user.id) ? (
+					{comment.downvote.includes(user?.id) ? (
 						<ThumbDislike16Filled onClick={handleDownvote}/>
 					) : (
 						<ThumbDislike16Regular onClick={handleDownvote}/>
