@@ -1,11 +1,11 @@
 import { Avatar, Card, CardFooter, CardHeader, Link, Text} from "@fluentui/react-components"
 import { useRouter } from "next/router"
 import { ThumbLike16Filled, ThumbDislike16Regular, ThumbDislike16Filled, ThumbLike16Regular} from "@fluentui/react-icons"
-import { AuthContext } from "./providers/AuthProvider"
+import { AuthContext } from "../providers/AuthProvider"
 import { useContext  } from "react"
 import { downvoteComment, upvoteComment } from "@/services/comment-service"
 
-export default function SingleCommentCard({ comment }) {
+export default function SingleCommentCard({ comment, madeChangesComment }) {
 	const router = useRouter()
 	const { user, getToken } = useContext(AuthContext)
 
@@ -23,7 +23,17 @@ export default function SingleCommentCard({ comment }) {
 		const commentId = comment._id
 		const token = getToken()
 
-		const response = await upvoteComment(commentId, userId, token)
+		if(comment.upvote.includes(userId)){
+			console.log("already upvoted")
+			return
+		}else {
+			const response = await upvoteComment(commentId, userId, token)
+
+			if (response.message === "Comment upvoted successfully") {
+				madeChangesComment()
+			}
+		}
+
 	}
 
 	const handleDownvote = async() => {
@@ -31,7 +41,16 @@ export default function SingleCommentCard({ comment }) {
 		const commentId = comment._id
 		const token = getToken()
 
-		const response = await downvoteComment(commentId, userId, token)
+		if(comment.downvote.includes(userId)){
+			console.log("already downvoted")
+			return
+		} else {
+			const response = await downvoteComment(commentId, userId, token)
+			if (response.message === "Comment downvoted successfully") {
+				madeChangesComment()
+			}
+		}
+
 	}
 
 	return (
@@ -46,12 +65,12 @@ export default function SingleCommentCard({ comment }) {
 			<CardFooter>
 				<Text size={200} weight="bold">{() => totalVote(comment)}</Text>
 				{comment.upvote.includes(user.id) ? (
-					<ThumbLike16Filled/>
+					<ThumbLike16Filled onClick={handleUpvote}/>
 				) : (
 					<ThumbLike16Regular onClick={handleUpvote}/>
 				) }
 				{comment.downvote.includes(user.id) ? (
-					<ThumbDislike16Filled/>
+					<ThumbDislike16Filled onClick={handleDownvote}/>
 				) : (
 					<ThumbDislike16Regular onClick={handleDownvote}/>
 				)}

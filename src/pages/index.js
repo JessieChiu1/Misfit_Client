@@ -1,4 +1,4 @@
-import PostCard from "@/components/postCard"
+import PostCard from "@/components/postCard/postCard"
 import Header from "@/components/layout/header"
 import { usePostByStyle } from "@/hooks/usePost"
 import { makeStyles, shorthands, Spinner, Button, Text } from "@fluentui/react-components"

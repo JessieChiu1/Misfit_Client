@@ -5,7 +5,7 @@ import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
 import { useState, useContext } from "react"
 import SingleCommentCard from "./singleCommentCard"
-import { AuthContext } from './providers/AuthProvider'
+import { AuthContext } from '../providers/AuthProvider'
 import { createRootComment } from "@/services/comment-service"
 
 const useStyles = makeStyles({
@@ -42,7 +42,7 @@ export default function Comment({ postId }) {
 	const styles = useStyles()
 	const { user, getToken } = useContext(AuthContext)
 	const [commentBody, setCommentBody] = useState("")
-	const { allComment, isLoading, addComment } = useCommentByPostId(postId)
+	const { allComment, isLoading, madeChangesComment } = useCommentByPostId(postId)
 
 	const editor = useEditor({
 		extensions: [
@@ -77,7 +77,7 @@ export default function Comment({ postId }) {
 			}
 			const response = await createRootComment(payload, token)
 			if(response._id){
-				addComment()
+				madeChangesComment()
 				setCommentBody("")
 				editor.commands.setContent('')
 			}
@@ -96,7 +96,7 @@ return (
 			<Spinner size="large" />
 			) : allComment.length > 0 ? (
 			allComment.map((comment) => (
-				<SingleCommentCard comment={comment} key={comment._id} />
+				<SingleCommentCard comment={comment} madeChangesComment={madeChangesComment} key={comment._id} />
 			))
 			) : (
 			<Text size={500} className={styles.text}>

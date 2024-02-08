@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { usePostByUserId } from "@/hooks/usePost"
-import PostCard from "@/components/postCard"
+import PostCard from "@/components/postCard/postCard"
 import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
 import { makeStyles, shorthands, Spinner, Label, Button } from "@fluentui/react-components"

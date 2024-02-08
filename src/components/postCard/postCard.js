@@ -1,6 +1,6 @@
 import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Text, Body1, Image, Avatar, shorthands} from "@fluentui/react-components"
 import { useContext, useState, useEffect } from "react"
-import { AuthContext } from "./providers/AuthProvider"
+import { AuthContext } from "../providers/AuthProvider"
 import { likePost, unlikePost } from "@/services/post-service"
 import { Comment28Regular, CommentOff24Regular, Heart28Regular, Heart28Filled } from "@fluentui/react-icons"
 import Comment from "./comment"

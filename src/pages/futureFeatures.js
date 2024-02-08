@@ -16,41 +16,33 @@ const SoftLaunchTodo = [{
     order: 3,
     headerText: "Community-Approved Language",
     contextText: "Seek input from the community to ensure the language and terminology used in the app are appropriate and respectful. This collaborative approach will help in creating a platform that truly reflects the needs and preferences of the community.",
-}, {
-    order: 4,
-    headerText: "Rich Text Area",
-    contextText: "Currently the Text Area is not saving the review with line breaks. I want to fix this and also allow user more options like bolding text",
-}];
+}]
 
 const afterSoftLaunchTodo = [{
-    order: 5,
+    order: 4,
     headerText: "OAuth: Change Login/Signup to 'Sign in with Gmail'",
     contextText: "Revise the login/signup functionality to use email instead of a username. Allow users to reset passwords by sending them a password reset email.",
 }, {
-    order: 6,
+    order: 5,
     headerText: "Allow Bug Reports",
     contextText: "Develop a system for registering an email address with a domain name and enable users to submit bug reports.",
 }, {
-    order: 7,
+    order: 6,
     headerText: "Adding Mood Board and Saved Post Collections",
     contextText: "Enable users to create a mood board and add posts to them. Allow users to save posts and access them on their profile page. The mood board can be shared through a URL that can be copied.",
 }, {
-    order: 8,
-    headerText: "Adding Mood Board and Saved Post Collections",
-    contextText: "Allow users to create a mood board and add posts to them. Also, allow users to save posts and access them on their profile page.",
-}, {
-    order: 9,
+    order: 7,
     headerText: "Fill in Misfit Guidelines and FAQs based on community-approved content",
     contextText: "Engage the community to gather input on essential FAQs to include and guidelines they believe are important.",
 }, {
-    order: 10,
+    order: 8,
     headerText: "UI and Website Styling",
     contextText: "Determine the best font, color, and other visual aspects of the website.",
 }, {
-    order: 1,
+    order: 9,
     headerText: "Self-Sustainability",
     contextText: "Explore ways to monetize the website to ensure it pays for itself. This may involve adding Google Ads or a donation button.",
-}];
+}]
 
 
 const useStyles = makeStyles({

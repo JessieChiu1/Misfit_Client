@@ -50,6 +50,8 @@ NEXT_PUBLIC_API_URL=client endpoint beginning URL, should be domain in the futur
 - `next` - this is the react framework we are using
 - `@fluentui/react-components` - UI component library for styling my components
 - `@fluentui/react-icons` - common UI icon library for styling
+- `@tiptap/starter-kit` - rich text editor that translate the textarea to HTML text to be stored.
+    - more extension related to tiptap can be added
 
 ## Running the files:
 1. `npm run dev`
@@ -66,13 +68,13 @@ You should see something like this:
 
 ## TODOs
 - TODOs for soft launch
-    - **Edit posts** 
-    - **Commenting on posts and replying to comments**
+    - ~~Edit post~~
+    - ~~Commenting on posts and replying to comments~~
         - **Allowing OP to self moderate their posts by allowing them to delete any comments**
     - **Adding hashtags to the posts**
         - **Thinking about promoting designated hashtags to target specific problems the transgender community faced**
             - Example: narrow shoulder, wide shoulder, big feet, small feet, sleeves length
-    - **Flesh out the postCard component**
+    - ~~**Flesh out the postCard component**~~
     - **Consult the transgender community on the language of the website, make sure it is not offensive and is the right terminology that people are comfortable with**
 - TODOs for after soft launch
     - **Creating a email address with our domain name**
@@ -83,3 +85,6 @@ You should see something like this:
     - **Fill in the footer's links information**
     - **Making sure the website is secured**
     - **Further Optimizations to make sure the website runs smoothly**
+
+## Note
+- I am aware that the sizing of comment component and the postCard component is not the same size. I am looking into the best way to resolve this issue.
