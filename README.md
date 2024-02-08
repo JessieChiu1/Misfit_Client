@@ -70,21 +70,24 @@ You should see something like this:
 - TODOs for soft launch
     - ~~Edit post~~
     - ~~Commenting on posts and replying to comments~~
-        - **Allowing OP to self moderate their posts by allowing them to delete any comments**
-    - **Adding hashtags to the posts**
-        - **Thinking about promoting designated hashtags to target specific problems the transgender community faced**
+        - Allowing OP to self moderate their posts by allowing them to delete any comments
+    - Adding hashtags to the posts
+        - Thinking about promoting designated hashtags to target specific problems the transgender community faced
             - Example: narrow shoulder, wide shoulder, big feet, small feet, sleeves length
-    - ~~**Flesh out the postCard component**~~
-    - **Consult the transgender community on the language of the website, make sure it is not offensive and is the right terminology that people are comfortable with**
+    - ~~Flesh out the postCard component~~
+    - Consult the transgender community on the language of the website, make sure it is not offensive and is the right terminology that people are comfortable with
+    - Better user feedback for situation like:
+        - login/sign in/create new post/etc form is missing field or has incorrect or invalid response
+        - message bar that pops up when you either encounter an error or an action is successful
 - TODOs for after soft launch
-    - **Creating a email address with our domain name**
-    - **Allowing users to send bug report to our designated email**
-    - **Switching the authentication feature to "Sign in with Gmail" and use email instead of username to sign in**
-        - **Allowing user to reset password by sending them an email**
-    - **Need to look into privacy notice and terms & condition**
-    - **Fill in the footer's links information**
-    - **Making sure the website is secured**
-    - **Further Optimizations to make sure the website runs smoothly**
+    - Creating a email address with our domain name
+    - Allowing users to send bug report to our designated email
+    - Switching the authentication feature to "Sign in with Gmail" and use email instead of username to sign in
+        - Allowing user to reset password by sending them an email
+    - Need to look into privacy notice and terms & condition
+    - **Fill in the footer's links information
+    - Making sure the website is secured**
+    - Further Optimizations to make sure the website runs smoothly
 
 ## Note
 - I am aware that the sizing of comment component and the postCard component is not the same size. I am looking into the best way to resolve this issue.
