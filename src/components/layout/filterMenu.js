@@ -71,7 +71,7 @@ export default function FilterMenu({ style }) {
 								<MenuList>
 								{option[style]?.map((item) => (
 									<MenuItemLink
-									onClick={() => handleNavigation(`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}?type=${item}`)}
+									onClick={() => handleNavigation(`/${style.toLowerCase()}?type=${item}`)}
 									key={`${option.label}_${item}`}
 									>
 									<Subtitle2>{item}</Subtitle2>
@@ -82,7 +82,7 @@ export default function FilterMenu({ style }) {
 							</Menu>
 						) : (
 							<MenuItemLink
-							onClick={() => handleNavigation(`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}?type=${option}`)}
+							onClick={() => handleNavigation(`/${style.toLowerCase()}?type=${option}`)}
 							key={option}
 							>
 							<Subtitle2>{option}</Subtitle2>
