@@ -14,7 +14,13 @@ export const useCommentByPostId = (postId) => {
                 const data = await postService.getCommentByPostId(postId)
 
                 if (Array.isArray(data)) {
-                    setAllComment(data)
+                    const sortedComments = data.sort((a, b) => {
+                        const totalVoteA = a.upvote.length - a.downvote.length;
+                        const totalVoteB = b.upvote.length - b.downvote.length;
+                        return totalVoteB - totalVoteA;
+                    });
+
+                    setAllComment(sortedComments);
                 } else {
                     setAllComment([])
                 }

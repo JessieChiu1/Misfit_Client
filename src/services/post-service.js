@@ -108,6 +108,5 @@ export const getCommentByPostId = async(postId) => {
 		method: "GET",
 	})
 	const data = await response.json()
-	console.log(data)
 	return data
 }

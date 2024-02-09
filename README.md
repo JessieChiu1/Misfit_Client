@@ -90,4 +90,4 @@ You should see something like this:
     - Further Optimizations to make sure the website runs smoothly
 
 ## Note
-- I am aware that the sizing of comment component and the postCard component is not the same size. I am looking into the best way to resolve this issue.
+- I am aware that clicking on the **Heart** is triggering a re-render and closing the comment box. I am looking into ways to resolve this issue

@@ -90,20 +90,18 @@ export default function Comment({ postId, OP }) {
 
 return (
 	<div className={styles.container}>
-		<form onSubmit={handleSubmit} className={styles.form}>
-			{user ? (
-                <form onSubmit={handleSubmit} className={styles.form}>
-                    <EditorContent editor={editor} className={styles.editor} />
-                    <Button appearance="primary" type="submit">
-                        Submit Comment
-                    </Button>
-                </form>
-            ) : (
-                <Text size={500} className={styles.text}>
-                    Please login to make a comment
-                </Text>
-            )}
-		</form>
+		{user ? (
+			<form onSubmit={handleSubmit} className={styles.form}>
+				<EditorContent editor={editor} className={styles.editor} />
+				<Button appearance="primary" type="submit">
+					Submit Comment
+				</Button>
+			</form>
+		) : (
+			<Text size={500} className={styles.text}>
+				Please login to make a comment
+			</Text>
+		)}
 		{isLoading ? (
 			<Spinner size="large" />
 			) : allComment.length > 0 ? (

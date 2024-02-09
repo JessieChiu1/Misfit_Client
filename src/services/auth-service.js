@@ -1,6 +1,4 @@
 export const signup = async (payload) => {
-    console.log(process.env.NEXT_PUBLIC_API_URL)
-    console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/signup`)
     const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/api/v1/auth/signup`, {
         method: "POST",
         headers: {
