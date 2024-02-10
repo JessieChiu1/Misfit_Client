@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     comment: {
         display: "flex",
         alignContent: "center",
-        justifyContent: "center",
+        justifyContent: "flex-start",
     },
     commentContainer: {
         overflowY: "auto",
@@ -183,7 +183,7 @@ export default function PostCard({ post, madeChanges }) {
                 <div 
                     ref={commentContainerRef} 
                     className={styles.commentContainer} 
-                    style={{ maxHeight: `${cardDimensions.height}px`, width: `${cardDimensions.width}px`}}>
+                    style={{ height: `${cardDimensions.height}px`, width: `${cardDimensions.width}px`}}>
                     <Comment 
                         postId={post._id} 
                         OP={post.user._id} 
