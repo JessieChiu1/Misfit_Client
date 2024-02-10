@@ -11,22 +11,21 @@ import { createRootComment } from "@/services/comment-service"
 const useStyles = makeStyles({
 	container: {
 		...shorthands.padding("20px"),
-		overflowY: "scroll",
-		width: "500px",
-		maxHeight: "1000px"
+		height: "100%",
+		width: "100%"
 	},
 	form: {
 		display: "flex",
-		width: "100%",
 		justifyContent: "center",
-		alignItems: "center"
+		alignItems: "center",
+		flexDirection: "column",
 	},
 	button: {
         width: "fit-content",
 		height: "fit-content"
 	},
 	editor: {
-		width: "80%"
+		width: "100%",
 	},
 	review_text: {
 		whiteSpace: "pre-line",
@@ -92,7 +91,7 @@ return (
 	<div className={styles.container}>
 		{user ? (
 			<form onSubmit={handleSubmit} className={styles.form}>
-				<EditorContent editor={editor} className={styles.editor} />
+				<EditorContent editor={editor} className={styles.editor}/>
 				<Button appearance="primary" type="submit">
 					Submit Comment
 				</Button>
