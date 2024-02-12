@@ -49,6 +49,7 @@ const useStyles = makeStyles({
         justifyContent: "center",
         alignItems: "center",
         margin: "20px",
+        ...shorthands.margin("15px")
     },
     heartIcon: {
         color: "red",
