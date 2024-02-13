@@ -9,20 +9,18 @@ const useStyles = makeStyles({
     top_banner: {
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "flex-start",
-        ...shorthands.padding("20px"),
-    },
-    logo_container: {
-        display: "flex",
-        justifyContent: "center",
         alignItems: "center",
-        width: "100%",
-        height: "auto"
+        ...shorthands.padding("20px"),
     },
     logo: {
         width: "25%",
         height: "auto",
     },
+    container: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    }
 })
 
 export default function Header() {
@@ -39,14 +37,14 @@ export default function Header() {
                 <ToggleMenu/>
                 <UserHeader/>
             </div>
-            <Button appearance="transparent" className={styles.logo_container}>
+            <div className={styles.container}>
                 <Image 
                     className={styles.logo}
                     src="/logo.png"
                     alt="logo"
                     onClick={handleNavigation}
                 />
-            </Button>
+            </div>
             <div id="filter">
                 <Filter/>
             </div>

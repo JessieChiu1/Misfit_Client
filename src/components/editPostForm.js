@@ -196,7 +196,8 @@ export default function EditPostForm({ post, setEditPost, madeChanges }) {
                                     onChange={handleChangePrice}
                                 />
                                 <Button 
-                                    onClick={() => handleRemovePhoto()}>Remove Photo</Button>
+                                    onClick={() => handleRemovePhoto()}
+                                    >Remove Photo</Button>
                             </div>
                             <EditorContent editor={editor} />
                         </CardFooter>
@@ -204,9 +205,12 @@ export default function EditPostForm({ post, setEditPost, madeChanges }) {
                     <div className={styles.button_container}>
                         <Button 
                             appearance="primary" 
-                            onClick={() => handleClose()}>Close</Button>
+                            onClick={() => handleClose()}
+                            >Close</Button>
                         <Button 
-                            appearance="primary" type="submit">
+                            appearance="primary" 
+                            type="submit"
+                            >
                             Update Post
                         </Button>
                     </div>

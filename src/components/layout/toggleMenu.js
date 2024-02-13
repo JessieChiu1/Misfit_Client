@@ -6,15 +6,11 @@ import { useRouter } from "next/router"
 
 const useStyles = makeStyles({
 	icon: {
-		width: "50px",
-		height: "50px",
+	  width: "3vw",
+	  height: "auto",
+	  minWidth: "30px",
+	  cursor: "pointer",
 	},
-	menuButton: {
-		minWidth: "75px",
-		minHeight: "75px",
-		...shorthands.padding("0px")
-	}
-
 })
 
 export default function ToggleMenu() {
@@ -24,39 +20,39 @@ export default function ToggleMenu() {
 
 	const handleNavigation = (route) => {
 		router.push(route)
-	}
+	};
 
 	return (
-		<Menu>
-		<MenuTrigger disableButtonEnhancement>
-			<Button className={styles.menuButton}>
-				<LineHorizontal3Filled className={styles.icon} />
-			</Button>
-		</MenuTrigger>
+		<Menu openOnHover="true">
+			<MenuTrigger disableButtonEnhancement>
+				<LineHorizontal3Filled 
+					className={styles.icon}
+					/>
+			</MenuTrigger>
 
-		<MenuPopover>
-			<MenuList>
-			{user ? (
-				<>
-					<MenuItemLink onClick={() => handleNavigation(`/user/${user.id}`)}>
-						<Text>Profile</Text>
+			<MenuPopover>
+				<MenuList>
+				{user ? (
+					<>
+						<MenuItemLink onClick={() => handleNavigation(`/user/${user.id}`)}>
+							<Text>Profile</Text>
+						</MenuItemLink>
+						<MenuItemLink onClick={() => handleNavigation("/createNewPost")}>
+							<Text>Create New Post</Text>
+						</MenuItemLink>
+					</>
+				) : (
+					<>
+						<MenuItemLink onClick={() => handleNavigation("/signup")}>
+							<Text>Signup or Login To Make A Post</Text>
+						</MenuItemLink>
+					</>
+				)}
+					<MenuItemLink onClick={() => handleNavigation("/about")}>
+							<Text>About</Text>
 					</MenuItemLink>
-					<MenuItemLink onClick={() => handleNavigation("/createNewPost")}>
-						<Text>Create New Post</Text>
-					</MenuItemLink>
-				</>
-			) : (
-				<>
-					<MenuItemLink onClick={() => handleNavigation("/signup")}>
-						<Text>Signup or Login To Make A Post</Text>
-					</MenuItemLink>
-				</>
-			)}
-				<MenuItemLink onClick={() => handleNavigation("/about")}>
-						<Text>About</Text>
-				</MenuItemLink>
-			</MenuList>
-		</MenuPopover>
+				</MenuList>
+			</MenuPopover>
 		</Menu>
 	)
 }

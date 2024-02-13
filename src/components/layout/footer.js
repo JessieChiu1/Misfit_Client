@@ -64,10 +64,18 @@ export default function Footer() {
                 <Label className={styles.label}>Contact Me</Label>
                 <div className={styles.contact_logo_container}>
 					<Link href="https://www.linkedin.com/in/jessiechiu12/">
-						<Image className={styles.contact_logo} src="/LI-Logo.png" alt="LinkedIn Logo"/>
+						<Image 
+							className={styles.contact_logo} 
+							src="/LI-Logo.png" 
+							alt="LinkedIn Logo"
+							/>
 					</Link>
 					<Link src="https://github.com/JessieChiu1">
-						<Image className={styles.contact_logo} src="/github-mark.png" alt="GitHub Mark"/>
+						<Image 
+							className={styles.contact_logo} 
+							src="/github-mark.png" 
+							alt="GitHub Mark"
+							/>
 					</Link>
                 </div>
             </section>

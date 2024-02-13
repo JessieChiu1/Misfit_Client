@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     file: {
         minHeight: "50vh",
         width:"100%"
-    }
+    },
 })
 
 export default function EditPostForm() {
@@ -185,7 +185,8 @@ export default function EditPostForm() {
                                     onChange={handleChangePrice}
                                 />
                                 <Button 
-                                    onClick={() => setPhoto()}>
+                                    onClick={() => setPhoto()}
+                                    >
                                     Remove Photo
                                 </Button>
                             </div>
@@ -195,7 +196,8 @@ export default function EditPostForm() {
                     <div className={styles.button_container}>
                         <Button
                             appearance="primary" 
-                            type="submit">
+                            type="submit"
+                            >
                             Create Post
                         </Button>
                     </div>

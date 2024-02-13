@@ -19,6 +19,9 @@ const useStyles = makeStyles({
 			marginLeft: "5px",
 			marginRight: "5px"
 		}
+	},
+	icon: {
+		cursor: "pointer",
 	}
 })
 
@@ -98,14 +101,26 @@ export default function SingleCommentCard({ comment, madeChangesComment}) {
 				<div className={styles.vote}>
 					<Text size={200} weight="bold">{() => totalVote(comment)}</Text>
 					{comment.upvote.includes(user?.id) ? (
-						<ThumbLike16Filled onClick={handleUpvote}/>
+						<ThumbLike16Filled 
+							onClick={handleUpvote}
+							className={styles.icon}
+							/>
 					) : (
-						<ThumbLike16Regular onClick={handleUpvote}/>
+						<ThumbLike16Regular 
+							onClick={handleUpvote}
+							className={styles.icon}
+							/>
 					) }
 					{comment.downvote.includes(user?.id) ? (
-						<ThumbDislike16Filled onClick={handleDownvote}/>
+						<ThumbDislike16Filled 
+							onClick={handleDownvote}
+							className={styles.icon}
+							/>
 					) : (
-						<ThumbDislike16Regular onClick={handleDownvote}/>
+						<ThumbDislike16Regular 
+							onClick={handleDownvote}
+							className={styles.icon}
+							/>
 					)}
 				</div>
 				{comment.rightToDelete.includes(user?.id) && (

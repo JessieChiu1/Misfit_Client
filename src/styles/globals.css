@@ -110,6 +110,10 @@ a {
 
 .ProseMirror {
   min-height: 10rem;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  padding: 7px;
+  background-color: white;
 }
 
 .ProseMirror p.is-editor-empty:first-child::before {

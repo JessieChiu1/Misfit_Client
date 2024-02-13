@@ -12,7 +12,7 @@ const useStyles = makeStyles({
 	container: {
 		...shorthands.padding("20px"),
 		height: "100%",
-		width: "100%"
+		width: "100%",
 	},
 	form: {
 		display: "flex",
@@ -21,8 +21,7 @@ const useStyles = makeStyles({
 		flexDirection: "column",
 	},
 	button: {
-        width: "fit-content",
-		height: "fit-content"
+        ...shorthands.margin("5px"),
 	},
 	editor: {
 		width: "100%",
@@ -67,7 +66,7 @@ export default function Comment({ postId, OP }) {
 				console.log("please write something")
 				return
 			}
-			
+
 			const token = getToken()
 			const payload = {
 				user: user?.id,
@@ -92,7 +91,11 @@ return (
 		{user ? (
 			<form onSubmit={handleSubmit} className={styles.form}>
 				<EditorContent editor={editor} className={styles.editor}/>
-				<Button appearance="primary" type="submit">
+				<Button 
+					appearance="primary" 
+					type="submit"
+					className={styles.button}
+					>
 					Submit Comment
 				</Button>
 			</form>

@@ -2,7 +2,7 @@ import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Text, Body1, Ima
 import { useContext, useState, useRef, useEffect } from "react"
 import { AuthContext } from "../providers/AuthProvider"
 import { likePost, unlikePost } from "@/services/post-service"
-import { Comment24Regular, CommentOff24Regular, Heart28Regular, Heart28Filled } from "@fluentui/react-icons"
+import { Comment24Regular, CommentOff24Regular, Heart24Regular, Heart24Filled } from "@fluentui/react-icons"
 import Comment from "./comment"
 
 const useStyles = makeStyles({
@@ -41,7 +41,6 @@ const useStyles = makeStyles({
     },
     commentContainer: {
         overflowY: "auto",
-        ...shorthands.margin("10px")
     },
     container: {
         display: "flex",
@@ -49,7 +48,7 @@ const useStyles = makeStyles({
         justifyContent: "center",
         alignItems: "center",
         margin: "20px",
-        ...shorthands.margin("15px")
+        ...shorthands.margin("15px"),
     },
     heartIcon: {
         color: "red",
@@ -142,7 +141,7 @@ export default function PostCard({ post, madeChanges }) {
                     image={<Avatar name={post.user.username} />}
                     header={
                         <Body1>
-                            <Text size={700}>{post.title}</Text>
+                            <Text size={500}>{post.title}</Text>
                         </Body1>
                     }
                 />
@@ -158,26 +157,41 @@ export default function PostCard({ post, madeChanges }) {
                 </CardPreview>
                 <CardFooter className={styles.content}>
                     <div className={styles.row}>
-                        <Text size={500}>{post.style}</Text>
-                        <Text size={500}>{post.type}</Text>
-                        <Text size={500}>{`$${post.price}`}</Text>
+                        <Text size={300}>{post.style}</Text>
+                        <Text size={300}>{post.type}</Text>
+                        <Text size={300}>{`$${post.price}`}</Text>
                     </div>
                     <div className={styles.like_row}>
                         <div className={styles.like}>
                             {post.like.includes(user?.id) === false ? (
-                                <Heart28Regular onClick={handleLike} />
+                                <Heart24Regular 
+                                    onClick={handleLike}
+                                    style={{ cursor: "pointer" }}
+                                    />
                             ) : (
-                                <Heart28Filled onClick={handleUnlike} className={styles.heartIcon} />
+                                <Heart24Filled 
+                                    onClick={handleUnlike} 
+                                    className={styles.heartIcon}
+                                    style={{ cursor: "pointer" }}
+                                    />
                             )}
-                            <Text size={500}>{getLikeText(post)}</Text>
+                            <Text size={430000}>{getLikeText(post)}</Text>
                         </div>
                         {commentOpen ? (
-                            <CommentOff24Regular className={styles.comment} onClick={handleComment} />
+                            <CommentOff24Regular 
+                                className={styles.comment} 
+                                onClick={handleComment} 
+                                style={{ cursor: "pointer" }}
+                                />
                         ) : (
-                            <Comment24Regular className={styles.comment} onClick={handleComment} />
+                            <Comment24Regular 
+                                className={styles.comment} 
+                                onClick={handleComment} 
+                                style={{ cursor: "pointer" }}
+                                />
                         )}
                     </div>
-                    <Text size={600} className={styles.review_text}><div dangerouslySetInnerHTML={{ __html: post.review }} /></Text>
+                    <Text size={300} className={styles.review_text}><div dangerouslySetInnerHTML={{ __html: post.review }} /></Text>
                 </CardFooter>
             </Card>
             {commentOpen && (

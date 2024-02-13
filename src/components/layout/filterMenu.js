@@ -2,7 +2,7 @@ import React from 'react'
 import { Menu, MenuTrigger, MenuPopover, MenuList, MenuItemLink, Button, Text, Subtitle2, makeStyles, shorthands, MenuItem } from "@fluentui/react-components"
 import { useRouter } from "next/router"
 
-import { ChevronDown24Regular } from "@fluentui/react-icons"
+import { ChevronDown20Regular } from "@fluentui/react-icons"
 
 const optionList = [
 	"Accessory",
@@ -33,9 +33,14 @@ const optionList = [
 ]
 
 const useStyles = makeStyles({
-button: {
-	...shorthands.padding("15px")
-}
+	button: {
+		...shorthands.padding("15px")
+	},
+	text: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+	}
 })
 
 export default function FilterMenu({ style }) {
@@ -47,24 +52,26 @@ export default function FilterMenu({ style }) {
 	}
 
     return (
-		<Menu
-		openOnHover="true">
+		<Menu openOnHover="true">
 			<MenuTrigger disableButtonEnhancement>
-				<Button appearance='transparent' className={styles.button}>
-                    <Text size={600}>{style}<ChevronDown24Regular/></Text>
+				<Button appearance="transparent" className={styles.button}>
+					<div className={styles.text}>
+						<Text size={400} weight="semi-bold">{style}</Text>
+						<ChevronDown20Regular/>
+					</div>
                 </Button>
 			</MenuTrigger>
 			<MenuPopover>
 				<MenuList>
 					<MenuItemLink onClick={() => handleNavigation(`${process.env.NEXT_PUBLIC_API_URL}/${style.toLowerCase()}`)} key="All">
-						<Subtitle2>All</Subtitle2>
+						<Text size={300} weight="semi-bold">All</Text>
 					</MenuItemLink>
 					{optionList.map((option, index) => (
 						option.label ? (
 							<Menu key={index}>
 							<MenuTrigger disableButtonEnhancement>
 								<MenuItem>
-								<Subtitle2>{option.label}</Subtitle2>
+								<Text size={300} weight="semi-bold">{option.label}</Text>
 								</MenuItem>
 							</MenuTrigger>
 							<MenuPopover>
@@ -74,7 +81,7 @@ export default function FilterMenu({ style }) {
 									onClick={() => handleNavigation(`/${style.toLowerCase()}?type=${item}`)}
 									key={`${option.label}_${item}`}
 									>
-									<Subtitle2>{item}</Subtitle2>
+										<Text size={300} weight="semi-bold">{item}</Text>
 									</MenuItemLink>
 								))}
 								</MenuList>
@@ -85,7 +92,7 @@ export default function FilterMenu({ style }) {
 							onClick={() => handleNavigation(`/${style.toLowerCase()}?type=${option}`)}
 							key={option}
 							>
-							<Subtitle2>{option}</Subtitle2>
+								<Text size={300} weight="semi-bold">{option}</Text>
 							</MenuItemLink>
 						)
 						))}
