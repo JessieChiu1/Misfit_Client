@@ -54,12 +54,12 @@ export default function Footer() {
 				<Link onClick={() => handleNavigation("/misfitGuidelines")}>Misfit Guidelines</Link>
 				<Link onClick={() => handleNavigation("/futureFeatures")}>Future Features</Link>
             </section>
-			<section className={styles.subItem}>
+			{/* <section className={styles.subItem}>
                 <Label className={styles.label}>Terms and Condition</Label>
                 <Link>Privacy Policy</Link>
                 <Link>Terms of Service</Link>
 				<Link>Accessibility Information</Link>
-            </section>
+            </section> */}
             <section className={styles.subItem}>
                 <Label className={styles.label}>Contact Me</Label>
                 <div className={styles.contact_logo_container}>

@@ -72,7 +72,7 @@ export default function EditPostForm() {
 
     const handleSubmit = async (e) => {
         try {
-            e.preventDefault();
+            e.preventDefault()
             const token = getToken()
             const photoId = await createPhoto(photo, token)
             const payload = {
@@ -84,7 +84,7 @@ export default function EditPostForm() {
                 price,
                 like: [user.id],
                 photo: [photoId],
-            };
+            }
             const response = await createPost(payload, token)
             if (response.hasOwnProperty('_id')) {
                 handleNavigation("/")
@@ -95,22 +95,22 @@ export default function EditPostForm() {
     }
 
     const handleChangeTitle = (e) => {
-        setTitle(e.target.value);
+        setTitle(e.target.value)
     }
 
     const handleChangeType = (e) => {
-        setType(e.target.value);
+        setType(e.target.value)
     }
 
     const handleChangeStyle = (e) => {
-        setStyle(e.target.value);
+        setStyle(e.target.value)
     }
 
     const handleChangePrice = useCallback(
         (_ev, data) => {
-          console.log("onSpinButtonChange", data.value);
+          console.log("onSpinButtonChange", data.value)
           if (data.value !== undefined) {
-            setPrice(data.value);
+            setPrice(data.value)
           } 
         },
         [setPrice]

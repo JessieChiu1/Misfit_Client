@@ -14,29 +14,35 @@ NEXT_PUBLIC_API_URL=client endpoint beginning URL, should be domain in the futur
 ```
 
 ## File structures and file you will need to create
-    public                              # static file and logos
+    public                             
 
     src
-    ├── components                      # database connection configuration
-    │   └── layout                      # components associated with the header and footer
-    │       └── filter.js               # take the 3 filterMenu.js component to have all 3 styles in the nav bar
-    │       └── filterMenu.js           # Dropdown filter for Masculine/Feminine/Androgynous
-    │       └── footer.js               # the whole footer at the bottom
-    │       └── header.js               # the whole header that compromise of the filter/toggleMenu/userHeader
-    │       └── toggleMenu.js           # hamburger dropdown menu
-    │       └── userHeader.js           # login/signup button at the top of the header
-    │   └── providers                   # all providers (useContext)
-    │       └── AuthProvider.js         # useContext for storing the user/token information
-    │   └── editPostForm.js             
-    │   └── newPostForm.js        
-    │   └── postCard.js        
+    ├── components                      
+    │   ├── layout                      # components associated with the header and footer
+    │   │   ├── filter.js               # take the 3 filterMenu.js component to have all 3 styles in the nav bar
+    │   │   ├── filterMenu.js           # Dropdown filter for Masculine/Feminine/Androgynous
+    │   │   ├── footer.js               # the whole footer at the bottom
+    │   │   ├── header.js               # the whole header that compromise of the filter/toggleMenu/userHeader
+    │   │   ├── toggleMenu.js           # hamburger dropdown menu
+    │   │   └── userHeader.js           # login/signup button at the top of the header
+    │   ├── providers                   # all providers (useContext)
+    │   │   └── AuthProvider.js         # useContext for storing the user/token information
+    │   ├── postCard                    # all providers (useContext)
+    │   │   ├── comment.js              # comment container
+    │   │   ├── postCard.js             # whole PostCard
+    │   │   └── singleCommentCard.js    # single comment component
+    │   ├── editPostForm.js             
+    │   └──  newPostForm.js        
+    │   └── accordionItems.js           # single accordion item for FAQs and Misfit Guideline Page
     │
-    ├── hooks                           
-    │   ├── usePost.js                  # useEffect hook to fetch posts from backend for rendering
+    ├── hooks 
+    │   ├── useComment.js               # useEffect hook to fetch comments from backend for rendering         
+    │   └── usePost.js                  # useEffect hook to fetch posts from backend for rendering
     │
     ├── pages                           # actual pages 
     ├── services                        # functions that fetch data from backend
     │   ├── auth-service.js
+    │   ├── comment-service.js
     │   ├── photo-service.js
     │   └── post-service.js
     │   
@@ -70,7 +76,7 @@ You should see something like this:
 - TODOs for soft launch
     - ~~Edit post~~
     - ~~Commenting on posts and replying to comments~~
-        - Allowing OP to self moderate their posts by allowing them to delete any comments
+        - ~~Allowing OP to self moderate their posts by allowing them to delete any comments~~
     - Adding hashtags to the posts
         - Thinking about promoting designated hashtags to target specific problems the transgender community faced
             - Example: narrow shoulder, wide shoulder, big feet, small feet, sleeves length
@@ -90,4 +96,4 @@ You should see something like this:
     - Further Optimizations to make sure the website runs smoothly
 
 ## Note
-- I am aware that clicking on the **Heart** is triggering a re-render and closing the comment box. I am looking into ways to resolve this issue
+- I am aware that the login/signin doesn't work on mobile phone because I am storing the token via localstorage. I am looking to change up the authentication functionality to combat this issue.

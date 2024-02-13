@@ -25,7 +25,7 @@ button_container: {
 	alignItems: "center",
 	...shorthands.margin("10px")
 },
-});
+})
 
 export default function UserProfile() {
 	const router = useRouter()
@@ -39,15 +39,15 @@ export default function UserProfile() {
 
 	const handleDeletePost = async (postId) => {
 		try {
-		const token = getToken();
-		const response = await deletePost(postId, token);
+		const token = getToken()
+		const response = await deletePost(postId, token)
 		if (response.message === "Deleted Post") {
 			madeChanges()
 		}
 		} catch (e) {
 		console.log(e)
 		}
-	};
+	}
 
 	const handleEditPostForm = (post) => {
 		setEditPost(post)

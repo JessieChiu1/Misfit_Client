@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { Label, Input, Button, makeStyles, shorthands } from "@fluentui/react-components";
+import { Label, Input, Button, makeStyles, shorthands } from "@fluentui/react-components"
 import { useRouter } from "next/router"
 import { AuthContext } from "@/components/providers/AuthProvider"
 import { signup } from "../services/auth-service"
@@ -77,7 +77,7 @@ export default function Login() {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         try {
             if(password === password1 && username) {
                 const payload = {
@@ -97,7 +97,7 @@ export default function Login() {
                 }
             }
         } catch (error) {
-            console.error("Error during login:", error);
+            console.error("Error during login:", error)
             
         }
     }

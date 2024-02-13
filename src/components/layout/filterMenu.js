@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { Menu, MenuTrigger, MenuPopover, MenuList, MenuItemLink, Button, Text, Subtitle2, makeStyles, shorthands, MenuItem } from "@fluentui/react-components"
 import { useRouter } from "next/router"
 
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 button: {
 	...shorthands.padding("15px")
 }
-});
+})
 
 export default function FilterMenu({ style }) {
 	const router = useRouter()

@@ -54,7 +54,7 @@ export default function Comment({ postId, OP }) {
 		onUpdate: ({ editor }) => {
 		const formattedReview = editor
 			.getHTML()
-			.replace(`</p><p>`, "</p><br/><p>");
+			.replace(`</p><p>`, "</p><br/><p>")
 			setCommentBody(formattedReview)
 		},
 	})

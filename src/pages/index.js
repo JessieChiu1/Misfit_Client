@@ -19,7 +19,7 @@ container: {
 loadMoreButton: {
 	marginTop: "20px",
 },
-});
+})
 
 export default function Home() {
 const styles = useStyles()
@@ -37,7 +37,7 @@ useEffect(() => {
 const handleLoadMore = () => {
 	const newIndex = min(allPost.length, indexShown + 10)
 	setIndexShown(newIndex)
-};
+}
 
 return (
 	<>

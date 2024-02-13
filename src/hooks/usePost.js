@@ -25,13 +25,13 @@ export const usePostByStyle = (style, type = undefined) => {
 			setPost([])
 		}
 		} catch (error) {
-			console.error('Error fetching posts:', error);
+			console.error('Error fetching posts:', error)
 		} finally {
 			setLoading(false)
 		}
 	}
 
-	fetchData();
+	fetchData()
 	}, [style, type, change])
 
 	const madeChanges = () => {

@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 })
 
 export default function About() {
-    const styles = useStyles();
+    const styles = useStyles()
     
     return (
         <>

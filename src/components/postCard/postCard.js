@@ -73,20 +73,20 @@ export default function PostCard({ post, madeChanges }) {
     useEffect(() => {
         const timer = setTimeout(() => {
             if (commentOpen && commentContainerRef.current && cardRef.current) {
-                const commentRect = commentContainerRef.current.getBoundingClientRect();
-                const cardRect = cardRef.current.getBoundingClientRect();
+                const commentRect = commentContainerRef.current.getBoundingClientRect()
+                const cardRect = cardRef.current.getBoundingClientRect()
                 
                 //either center the commentContainer or scroll to the top depending on if the components are side by side or stack on top of one another
                 if (commentRect.bottom > cardRect.bottom) {
-                    commentContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    commentContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
                 } else {
-                    commentContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    commentContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
                 }
             }
-        }, 0);
+        }, 0)
     
-        return () => clearTimeout(timer);
-    }, [commentOpen]);
+        return () => clearTimeout(timer)
+    }, [commentOpen])
     
 
     const handleImageLoad = () => {
@@ -127,7 +127,7 @@ export default function PostCard({ post, madeChanges }) {
         if (post.like.includes(user?.id)) {
             return post.like.length === 1 ? "You like this post" : `You and ${post.like.length - 1} ${post.like.length - 1 === 1 ? "person" : "people"} like this post`
         } else {
-            return post.like.length === 1 ? "1 person likes this post" : `${post.like.length} people like this post`;
+            return post.like.length === 1 ? "1 person likes this post" : `${post.like.length} people like this post`
         }
     }
 

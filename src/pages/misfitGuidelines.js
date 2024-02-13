@@ -40,7 +40,7 @@ export default function MisfitGuidelines() {
     const [openItems, setOpenItems] = useState([])
 
     const handleToggle = (e, data) => {
-      setOpenItems(data.openItems);
+      setOpenItems(data.openItems)
     }
 
     return (

@@ -10,8 +10,8 @@ const SoftLaunchTodo = [{
     contextText: "I aim to add hashtags to allow users to better categorize their posts. This will also assist in promoting specific tags to address particular challenges within the transgender community, such as narrow shoulders, wide shoulders, big feet, small feet, and sleeve length.",
 }, {
     order: 2,
-    headerText: "Comments and Replies",
-    contextText: "Enable comments and replies, empowering users to engage with each other. Additionally, empower post creators to self-moderate by providing the ability to delete any comments.",
+    headerText: "Improve UX and focus on content for every page",
+    contextText: "There is a lot of people who are interested in the project but it seems like my implementation or lack of content is turning the users off",
 }, {
     order: 3,
     headerText: "Community-Approved Language",
@@ -62,7 +62,7 @@ export default function FutureFeatures() {
     const [openItems, setOpenItems] = useState([])
 
     const handleToggle = (e, data) => {
-      setOpenItems(data.openItems);
+      setOpenItems(data.openItems)
     }
 
     return (

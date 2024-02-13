@@ -15,9 +15,9 @@ const useStyles = makeStyles({
 })
 
 export default function UserHeader() {
-	const router = useRouter();
-	const styles = useStyles();
-	const { user, setToken } = useContext(AuthContext);
+	const router = useRouter()
+	const styles = useStyles()
+	const { user, setToken } = useContext(AuthContext)
 
 	const handleClickLogout = () => {
 		setToken(undefined)

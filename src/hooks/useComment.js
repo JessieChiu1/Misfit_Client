@@ -15,12 +15,12 @@ export const useCommentByPostId = (postId) => {
 
                 if (Array.isArray(data)) {
                     const sortedComments = data.sort((a, b) => {
-                        const totalVoteA = a.upvote.length - a.downvote.length;
-                        const totalVoteB = b.upvote.length - b.downvote.length;
-                        return totalVoteB - totalVoteA;
+                        const totalVoteA = a.upvote.length - a.downvote.length
+                        const totalVoteB = b.upvote.length - b.downvote.length
+                        return totalVoteB - totalVoteA
                     });
 
-                    setAllComment(sortedComments);
+                    setAllComment(sortedComments)
                 } else {
                     setAllComment([])
                 }
@@ -28,7 +28,7 @@ export const useCommentByPostId = (postId) => {
                 console.error('Error fetching posts:', e)
                 setAllComment([])
             } finally {
-                setIsLoading(false);
+                setIsLoading(false)
             }
         }
 

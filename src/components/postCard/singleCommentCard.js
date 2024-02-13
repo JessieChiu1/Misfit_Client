@@ -2,7 +2,7 @@ import { Avatar, Card, CardFooter, CardHeader, Link, Text, Button, makeStyles} f
 import { useRouter } from "next/router"
 import { ThumbLike16Filled, ThumbDislike16Regular, ThumbDislike16Filled, ThumbLike16Regular} from "@fluentui/react-icons"
 import { AuthContext } from "../providers/AuthProvider"
-import { useContext, useState  } from "react"
+import { useContext  } from "react"
 import { deleteComment, downvoteComment, upvoteComment } from "@/services/comment-service"
 
 const useStyles = makeStyles({

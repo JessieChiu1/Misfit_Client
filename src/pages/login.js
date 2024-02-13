@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { Label, Input, Button, makeStyles, shorthands } from "@fluentui/react-components";
+import { Label, Input, Button, makeStyles, shorthands } from "@fluentui/react-components"
 import { useRouter } from "next/router"
 import { AuthContext } from "@/components/providers/AuthProvider"
 import { login } from "../services/auth-service"
@@ -72,7 +72,7 @@ export default function Login() {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         try {
             if (username && password) {
                 const payload = {

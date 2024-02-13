@@ -4,7 +4,7 @@ const useStyles = makeStyles({
     context: {
         marginLeft: "5em"
     }
-});
+})
 
 export default function CustomAccordionItem({ order, headerText, contextText }) {
     const styles = useStyles()

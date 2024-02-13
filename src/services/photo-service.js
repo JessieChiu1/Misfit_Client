@@ -18,7 +18,7 @@ export const createPhoto = async (photo, token) => {
         console.error(e)
         return null
     }
-};
+}
 
 
 export const deletePhoto = async(id) => {

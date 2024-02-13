@@ -103,21 +103,21 @@ export default function EditPostForm({ post, setEditPost, madeChanges }) {
     }
 
     const handleChangeTitle = (e) => {
-        setTitle(e.target.value);
+        setTitle(e.target.value)
     }
 
     const handleChangeType = (e) => {
-        setType(e.target.value);
+        setType(e.target.value)
     }
 
     const handleChangeStyle = (e) => {
-        setStyle(e.target.value);
+        setStyle(e.target.value)
     }
 
     const handleChangePrice = useCallback(
         (_ev, data) => {
             if (data.value !== undefined) {
-                setPrice(data.value);
+                setPrice(data.value)
             } 
         },
         [setPrice]

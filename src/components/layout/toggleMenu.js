@@ -24,7 +24,7 @@ export default function ToggleMenu() {
 
 	const handleNavigation = (route) => {
 		router.push(route)
-	};
+	}
 
 	return (
 		<Menu>
@@ -58,5 +58,5 @@ export default function ToggleMenu() {
 			</MenuList>
 		</MenuPopover>
 		</Menu>
-	);
+	)
 }
