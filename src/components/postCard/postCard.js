@@ -85,7 +85,9 @@ export default function PostCard({ post, madeChanges }) {
     // https://github.com/facebook/react/issues/23396
     useEffect(() => {
         const timer = setTimeout(() => {
-            if (commentOpen && commentContainerRef.current && cardRef.current) {
+            if (!commentOpen && cardRef.current) {
+                cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+            } else if (commentOpen && commentContainerRef.current && cardRef.current) {
                 const commentRect = commentContainerRef.current.getBoundingClientRect()
                 const cardRect = cardRef.current.getBoundingClientRect()
                 

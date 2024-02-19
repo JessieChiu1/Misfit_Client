@@ -43,9 +43,9 @@ const useHoverStyles = makeStyles({
       transitionDuration: "0.25s",
       transitionTimingFunction: "linear"
     },
-    hoverEffect: {
+    hoverEffectSmall: {
       '&:hover': {
-        transform: 'scale(1.2)',
+        transform: 'scale(1.1)',
       },
     },
 })
@@ -108,7 +108,7 @@ return (
 				<Button 
 					appearance="primary" 
 					type="submit"
-					className={mergeClasses(styles.button, hoverStyles.hoverEffect, hoverStyles.hoverTransition)}
+					className={mergeClasses(styles.button, hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
 					>
 					Submit Comment
 				</Button>

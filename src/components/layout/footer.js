@@ -48,6 +48,11 @@ const useHoverStyles = makeStyles({
         transform: 'scale(1.3)',
       },
     },
+	hoverEffectSmall: {
+		'&:hover': {
+		  transform: 'scale(1.1)',
+		},
+	},
 })
 
 export default function Footer() {
@@ -65,19 +70,19 @@ export default function Footer() {
                 <Label className={styles.label}>About</Label>
                 <Link 
 					onClick={() => handleNavigation("/about")}
-					className={mergeClasses(hoverStyles.hoverEffect, hoverStyles.hoverTransition)}
+					className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
 					>About Misfit</Link>
 				<Link 
 					onClick={() => handleNavigation("/FAQs")}
-					className={mergeClasses(hoverStyles.hoverEffect, hoverStyles.hoverTransition)}
+					className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
 					>FAQs</Link>
 				<Link 
 					onClick={() => handleNavigation("/misfitGuidelines")}
-					className={mergeClasses(hoverStyles.hoverEffect, hoverStyles.hoverTransition)}
+					className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
 					>Misfit Guidelines</Link>
 				<Link 
 					onClick={() => handleNavigation("/futureFeatures")}
-					className={mergeClasses(hoverStyles.hoverEffect, hoverStyles.hoverTransition)}
+					className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
 					>Future Features</Link>
             </section>
 			{/* <section className={styles.subItem}>
