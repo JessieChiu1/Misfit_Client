@@ -85,9 +85,11 @@ export default function PostCard({ post, madeChanges }) {
     // https://github.com/facebook/react/issues/23396
     useEffect(() => {
         const timer = setTimeout(() => {
-            if (!commentOpen && cardRef.current) {
-                cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
-            } else if (commentOpen && commentContainerRef.current && cardRef.current) {
+            //This does work until you are liking/unliking the post, then it scrolled to the bottom. Look into how to fix this?
+            // if (!commentOpen && cardRef.current) {
+            //     cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+            // } 
+            if (commentOpen && commentContainerRef.current && cardRef.current) {
                 const commentRect = commentContainerRef.current.getBoundingClientRect()
                 const cardRect = cardRef.current.getBoundingClientRect()
                 
