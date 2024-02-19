@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { AuthContext } from "@/components/providers/AuthProvider"
-import { Avatar, Button, makeStyles, shorthands, Text } from "@fluentui/react-components"
+import { Avatar, Button, makeStyles, mergeClasses, shorthands, Text } from "@fluentui/react-components"
 import { useRouter } from "next/router"
 
 const useStyles = makeStyles({
@@ -14,9 +14,23 @@ const useStyles = makeStyles({
     },
 })
 
+const useHoverStyles = makeStyles({
+    hoverTransition: {
+      transitionProperty: 'transform',
+      transitionDuration: "0.25s",
+      transitionTimingFunction: "linear"
+    },
+    hoverEffectSmall: {
+      '&:hover': {
+        transform: 'scale(1.2)',
+      },
+    },
+})
+
 export default function UserHeader() {
 	const router = useRouter()
 	const styles = useStyles()
+	const hoverStyles = useHoverStyles()
 	const { user, setToken } = useContext(AuthContext)
 
 	const handleClickLogout = () => {
@@ -35,6 +49,7 @@ export default function UserHeader() {
 				<Button 
 					appearance="primary" 
 					onClick={handleClickLogout}
+					className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
 					>Logout</Button>
 			</div>
 			) : (
@@ -42,10 +57,12 @@ export default function UserHeader() {
 				<Button 
 					appearance="primary" 
 					onClick={() => handleNavigation("/signup")}
+					className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
 					>Sign up</Button>
 				<Button 
 					appearance="primary" 
 					onClick={() => handleNavigation("/login")}
+					className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
 					>Login</Button>
 			</div>
 			)}

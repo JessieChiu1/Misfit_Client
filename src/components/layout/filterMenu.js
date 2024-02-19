@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, MenuTrigger, MenuPopover, MenuList, MenuItemLink, Button, Text, Subtitle2, makeStyles, shorthands, MenuItem } from "@fluentui/react-components"
+import { Menu, MenuTrigger, MenuPopover, MenuList, MenuItemLink, Button, Text, Subtitle2, makeStyles, shorthands, MenuItem, mergeClasses } from "@fluentui/react-components"
 import { useRouter } from "next/router"
 
 import { ChevronDown20Regular } from "@fluentui/react-icons"
@@ -43,9 +43,23 @@ const useStyles = makeStyles({
 	}
 })
 
+const useHoverStyles = makeStyles({
+    hoverTransition: {
+      transitionProperty: 'transform',
+      transitionDuration: "0.25s",
+      transitionTimingFunction: "linear"
+    },
+    hoverEffect: {
+      '&:hover': {
+        transform: 'scale(1.3)',
+      },
+    },
+})
+
 export default function FilterMenu({ style }) {
 	const router = useRouter()
 	const styles = useStyles()
+	const hoverStyles = useHoverStyles()
 
 	const handleNavigation = (route) => {
 		router.push(route)
@@ -54,7 +68,7 @@ export default function FilterMenu({ style }) {
     return (
 		<Menu openOnHover="true">
 			<MenuTrigger disableButtonEnhancement>
-				<Button appearance="transparent" className={styles.button}>
+				<Button appearance="transparent" className={mergeClasses(styles.button, hoverStyles.hoverEffect, hoverStyles.hoverTransition)}>
 					<div className={styles.text}>
 						<Text size={400} weight="semi-bold">{style}</Text>
 						<ChevronDown20Regular/>

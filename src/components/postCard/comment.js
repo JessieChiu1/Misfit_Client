@@ -1,5 +1,5 @@
 import { useCommentByPostId } from "@/hooks/useComment"
-import { Button, Spinner, Text, makeStyles, shorthands } from "@fluentui/react-components"
+import { Button, Spinner, Text, makeStyles, mergeClasses, shorthands } from "@fluentui/react-components"
 import { useEditor, EditorContent } from "@tiptap/react"
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
@@ -37,8 +37,22 @@ const useStyles = makeStyles({
 	}
 })
 
+const useHoverStyles = makeStyles({
+    hoverTransition: {
+      transitionProperty: 'transform',
+      transitionDuration: "0.25s",
+      transitionTimingFunction: "linear"
+    },
+    hoverEffect: {
+      '&:hover': {
+        transform: 'scale(1.2)',
+      },
+    },
+})
+
 export default function Comment({ postId, OP }) {
 	const styles = useStyles()
+	const hoverStyles = useHoverStyles()
 	const { user, getToken } = useContext(AuthContext)
 	const [commentBody, setCommentBody] = useState("")
 	const { allComment, isLoading, madeChangesComment } = useCommentByPostId(postId)
@@ -94,7 +108,7 @@ return (
 				<Button 
 					appearance="primary" 
 					type="submit"
-					className={styles.button}
+					className={mergeClasses(styles.button, hoverStyles.hoverEffect, hoverStyles.hoverTransition)}
 					>
 					Submit Comment
 				</Button>

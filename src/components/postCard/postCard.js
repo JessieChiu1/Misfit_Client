@@ -1,4 +1,4 @@
-import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Text, Body1, Image, Avatar, shorthands } from "@fluentui/react-components"
+import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Text, Body1, Image, Avatar, shorthands, mergeClasses } from "@fluentui/react-components"
 import { useContext, useState, useRef, useEffect } from "react"
 import { AuthContext } from "../providers/AuthProvider"
 import { likePost, unlikePost } from "@/services/post-service"
@@ -55,11 +55,25 @@ const useStyles = makeStyles({
     },
     image: {
         maxHeight: "60vh",
-    }
+    },
+})
+
+const useHoverStyles = makeStyles({
+    hoverTransition: {
+      transitionProperty: 'transform',
+      transitionDuration: "0.25s",
+      transitionTimingFunction: "linear"
+    },
+    hoverEffect: {
+      '&:hover': {
+        transform: 'scale(1.3)',
+      },
+    },
 })
 
 export default function PostCard({ post, madeChanges }) {
     const styles = useStyles()
+    const hoverStyles = useHoverStyles()
     const { user, getToken } = useContext(AuthContext)
     const [commentOpen, setCommentOpen] = useState(false)
     const cardRef = useRef(null)
@@ -167,11 +181,12 @@ export default function PostCard({ post, madeChanges }) {
                                 <Heart24Regular 
                                     onClick={handleLike}
                                     style={{ cursor: "pointer" }}
+                                    className={mergeClasses(hoverStyles.hoverTransition, hoverStyles.hoverEffect)}
                                     />
                             ) : (
                                 <Heart24Filled 
                                     onClick={handleUnlike} 
-                                    className={styles.heartIcon}
+                                    className={mergeClasses(styles.heartIcon, hoverStyles.hoverTransition, hoverStyles.hoverEffect)}
                                     style={{ cursor: "pointer" }}
                                     />
                             )}
@@ -179,13 +194,13 @@ export default function PostCard({ post, madeChanges }) {
                         </div>
                         {commentOpen ? (
                             <CommentOff24Regular 
-                                className={styles.comment} 
+                                className={mergeClasses(styles.comment, hoverStyles.hoverEffect, hoverStyles.hoverTransition)}
                                 onClick={handleComment} 
                                 style={{ cursor: "pointer" }}
                                 />
                         ) : (
                             <Comment24Regular 
-                                className={styles.comment} 
+                                className={mergeClasses(styles.comment, hoverStyles.hoverEffect, hoverStyles.hoverTransition)} 
                                 onClick={handleComment} 
                                 style={{ cursor: "pointer" }}
                                 />

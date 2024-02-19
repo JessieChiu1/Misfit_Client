@@ -1,4 +1,4 @@
-import { Avatar, Card, CardFooter, CardHeader, Link, Text, Button, makeStyles} from "@fluentui/react-components"
+import { Avatar, Card, CardFooter, CardHeader, Link, Text, Button, makeStyles, mergeClasses} from "@fluentui/react-components"
 import { useRouter } from "next/router"
 import { ThumbLike16Filled, ThumbDislike16Regular, ThumbDislike16Filled, ThumbLike16Regular} from "@fluentui/react-icons"
 import { AuthContext } from "../providers/AuthProvider"
@@ -22,11 +22,34 @@ const useStyles = makeStyles({
 	},
 	icon: {
 		cursor: "pointer",
+	},
+	header: {
+		display: "flex",
+		alignItems: "center",
+	}
+})
+
+const useHoverStyles = makeStyles({
+    hoverTransition: {
+      transitionProperty: 'transform',
+      transitionDuration: "0.25s",
+      transitionTimingFunction: "linear"
+    },
+    hoverEffect: {
+      '&:hover': {
+        transform: 'scale(1.3)',
+      },
+    },
+	hoverEffectSmall: {
+		'&:hover': {
+			transform: 'scale(1.2)',
+		},
 	}
 })
 
 export default function SingleCommentCard({ comment, madeChangesComment}) {
 	const styles = useStyles()
+	const hoverStyles = useHoverStyles()
 	const router = useRouter()
 	const { user, getToken } = useContext(AuthContext)
 
@@ -91,9 +114,13 @@ export default function SingleCommentCard({ comment, madeChangesComment}) {
 	return (
 		<Card>
 			<CardHeader
+				className={styles.header}
 				image={<Avatar name={comment.user.username} />}
 				header={
-					<Link onClick={() => handleNavigation(`/user/${comment.user._id}`)}>{comment.user.username}</Link>
+					<Link 
+						onClick={() => handleNavigation(`/user/${comment.user._id}`)}
+						className={mergeClasses(styles.icon, hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
+						>{comment.user.username}</Link>
 				}
 			/>
 			<Text size={400} className="review_text"><div dangerouslySetInnerHTML={{ __html: comment.body }} /></Text>
@@ -103,28 +130,28 @@ export default function SingleCommentCard({ comment, madeChangesComment}) {
 					{comment.upvote.includes(user?.id) ? (
 						<ThumbLike16Filled 
 							onClick={handleUpvote}
-							className={styles.icon}
+							className={mergeClasses(styles.icon, hoverStyles.hoverEffect, hoverStyles.hoverTransition)}
 							/>
 					) : (
 						<ThumbLike16Regular 
 							onClick={handleUpvote}
-							className={styles.icon}
+							className={mergeClasses(styles.icon, hoverStyles.hoverEffect, hoverStyles.hoverTransition)}
 							/>
 					) }
 					{comment.downvote.includes(user?.id) ? (
 						<ThumbDislike16Filled 
 							onClick={handleDownvote}
-							className={styles.icon}
+							className={mergeClasses(styles.icon, hoverStyles.hoverEffect, hoverStyles.hoverTransition)}
 							/>
 					) : (
 						<ThumbDislike16Regular 
 							onClick={handleDownvote}
-							className={styles.icon}
+							className={mergeClasses(styles.icon, hoverStyles.hoverEffect, hoverStyles.hoverTransition)}
 							/>
 					)}
 				</div>
 				{comment.rightToDelete.includes(user?.id) && (
-					<Button appearance="transparent" onClick={handleDeleteComment}>Delete Comment</Button>
+					<Button appearance="transparent" onClick={handleDeleteComment} className={mergeClasses(styles.icon, hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}>Delete Comment</Button>
 				)}
 			</CardFooter>
 		</Card>
