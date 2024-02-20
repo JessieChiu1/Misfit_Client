@@ -3,7 +3,7 @@ import { usePostByUserId } from "@/hooks/usePost"
 import PostCard from "@/components/postCard/postCard"
 import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
-import { makeStyles, shorthands, Spinner, Label, Button } from "@fluentui/react-components"
+import { makeStyles, shorthands, Spinner, Label, Button, mergeClasses } from "@fluentui/react-components"
 import { AuthContext } from "@/components/providers/AuthProvider"
 import { useContext } from "react"
 import { deletePost } from "@/services/post-service"
@@ -27,9 +27,23 @@ button_container: {
 },
 })
 
+const useHoverStyles = makeStyles({
+    hoverTransition: {
+      transitionProperty: 'transform',
+      transitionDuration: "0.25s",
+      transitionTimingFunction: "linear"
+    },
+	hoverEffectSmall: {
+		'&:hover': {
+			transform: 'scale(1.1)',
+		},
+	}
+})
+
 export default function UserProfile() {
 	const router = useRouter()
 	const styles = useStyles()
+	const hoverStyles = useHoverStyles()
 	const { userId } = router.query
 	const { user, getToken } = useContext(AuthContext)
 
@@ -71,10 +85,18 @@ export default function UserProfile() {
 					<PostCard size="small" post={post} madeChanges={madeChanges}/>
 					{user && user.id === post.user ? (
 						<div className={styles.button_container}>
-						<Button appearance="primary" onClick={() => handleEditPostForm(post)}>
+						<Button 
+							appearance="primary" 
+							onClick={() => handleEditPostForm(post)}
+							className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
+							>
 							Edit Post
 						</Button>
-						<Button appearance="primary" onClick={() => handleDeletePost(post._id)}>
+						<Button 
+							appearance="primary" 
+							onClick={() => handleDeletePost(post._id)}
+							className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
+							>
 							Delete Post
 						</Button>
 						</div>

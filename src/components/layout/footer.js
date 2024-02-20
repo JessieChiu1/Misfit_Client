@@ -101,7 +101,7 @@ export default function Footer() {
 							alt="LinkedIn Logo"
 							/>
 					</Link>
-					<Link src="https://github.com/JessieChiu1">
+					<Link href="https://github.com/JessieChiu1">
 						<Image 
 							className={mergeClasses(styles.contact_logo, hoverStyles.hoverEffect, hoverStyles.hoverTransition)}
 							src="/github-mark.png" 

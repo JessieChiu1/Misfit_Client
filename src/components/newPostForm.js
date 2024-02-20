@@ -1,6 +1,6 @@
 import { useState, useContext, useCallback } from 'react'
 import { AuthContext } from './providers/AuthProvider'
-import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Input, Body1, Image, Label, Avatar, Select, SpinButton, Button, shorthands} from "@fluentui/react-components" 
+import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Input, Body1, Image, Label, Avatar, Select, SpinButton, Button, shorthands, mergeClasses} from "@fluentui/react-components" 
 import { useRouter } from "next/router"
 import { createPhoto } from '@/services/photo-service'
 import { createPost } from '@/services/post-service'
@@ -17,20 +17,20 @@ const useStyles = makeStyles({
     },
     row: {
         display: "flex",
-        justifyContent: "space-evenly",
+        justifyContent: "flex-start",
         flexWrap: "wrap",
         alignContent: "center",
         "> *": {
-            marginRight: "10px",
+            ...shorthands.margin("5px"),
         },
     },
     image: {
         maxHeight: "60vh",
     },
     button_container: {
-        ...shorthands.margin("10px"),
+        ...shorthands.margin("20px"),
         display: "flex",
-        justifyContent: "space-evenly",
+        justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
     },
@@ -40,10 +40,24 @@ const useStyles = makeStyles({
     },
 })
 
+const useHoverStyles = makeStyles({
+    hoverTransition: {
+      transitionProperty: 'transform',
+      transitionDuration: "0.25s",
+      transitionTimingFunction: "linear"
+    },
+	hoverEffectSmall: {
+		'&:hover': {
+			transform: 'scale(1.1)',
+		},
+	}
+})
+
 export default function EditPostForm() {
     const { user, getToken } = useContext(AuthContext)
     const router = useRouter()
     const styles = useStyles()
+    const hoverStyles = useHoverStyles()
 
     const [title, setTitle] = useState("")
     const [type, setType] = useState("Outfit Showcase")
@@ -186,6 +200,7 @@ export default function EditPostForm() {
                                 />
                                 <Button 
                                     onClick={() => setPhoto()}
+                                    className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
                                     >
                                     Remove Photo
                                 </Button>
@@ -197,6 +212,7 @@ export default function EditPostForm() {
                         <Button
                             appearance="primary" 
                             type="submit"
+                            className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
                             >
                             Create Post
                         </Button>

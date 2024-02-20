@@ -15,6 +15,7 @@ const useStyles = makeStyles({
     logo: {
         width: "25%",
         height: "auto",
+        cursor: "pointer",
     },
     container: {
         display: "flex",
@@ -27,8 +28,8 @@ export default function Header() {
     const styles = useStyles()
     const router = useRouter()
 
-    const handleNavigation = () => {
-        router.push("/")
+    const handleNavigation = (route) => {
+        router.push(route)
     }
 
     return (
@@ -42,7 +43,7 @@ export default function Header() {
                     className={styles.logo}
                     src="/logo.png"
                     alt="logo"
-                    onClick={handleNavigation}
+                    onClick={() => handleNavigation("/home")}
                 />
             </div>
             <div id="filter">

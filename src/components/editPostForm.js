@@ -1,6 +1,6 @@
 import { useState, useContext, useCallback, } from 'react'
 import { AuthContext } from './providers/AuthProvider'
-import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Input, Body1, Image, shorthands, Avatar, Select, SpinButton, Button} from "@fluentui/react-components" 
+import { Card, CardFooter, CardHeader, CardPreview, makeStyles, Input, Body1, Image, shorthands, Avatar, Select, SpinButton, Button, mergeClasses} from "@fluentui/react-components" 
 import { createPhoto } from '@/services/photo-service'
 import { editPost } from '@/services/post-service'
 import { useEditor, EditorContent } from '@tiptap/react'
@@ -39,9 +39,23 @@ const useStyles = makeStyles({
     }
 })
 
+const useHoverStyles = makeStyles({
+    hoverTransition: {
+      transitionProperty: 'transform',
+      transitionDuration: "0.25s",
+      transitionTimingFunction: "linear"
+    },
+	hoverEffectSmall: {
+		'&:hover': {
+			transform: 'scale(1.1)',
+		},
+	}
+})
+
 export default function EditPostForm({ post, setEditPost, madeChanges }) {
     const { user, getToken } = useContext(AuthContext)
     const styles = useStyles()
+    const hoverStyles = useHoverStyles()
 
     const [title, setTitle] = useState(post.title)
     const [type, setType] = useState(post.type)
@@ -206,10 +220,12 @@ export default function EditPostForm({ post, setEditPost, madeChanges }) {
                         <Button 
                             appearance="primary" 
                             onClick={() => handleClose()}
+                            className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
                             >Close</Button>
                         <Button 
                             appearance="primary" 
                             type="submit"
+                            className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
                             >
                             Update Post
                         </Button>
