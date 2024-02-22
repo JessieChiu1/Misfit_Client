@@ -1,4 +1,4 @@
-import { makeStyles, Display } from "@fluentui/react-components"
+import { makeStyles, LargeTitle } from "@fluentui/react-components"
 
 const useStyles = makeStyles({
     container: {
@@ -11,12 +11,12 @@ const useStyles = makeStyles({
     }
 })
 
-export default function ProblemBanner() {
+export default function AboutMisfitBanner() {
     const styles = useStyles()
 
     return (
         <div className={styles.container}>
-            <Display className={styles.text}>placeholder text</Display>
+            <LargeTitle className={styles.text}>placeholder text</LargeTitle>
         </div>
     )
 }

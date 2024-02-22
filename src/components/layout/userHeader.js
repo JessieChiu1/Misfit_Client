@@ -58,12 +58,12 @@ export default function UserHeader() {
 					appearance="primary" 
 					onClick={() => handleNavigation("/signup")}
 					className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
-					>Sign up</Button>
+					><Text>Sign up</Text></Button>
 				<Button 
 					appearance="primary" 
 					onClick={() => handleNavigation("/login")}
 					className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
-					>Login</Button>
+					><Text>Login</Text></Button>
 			</div>
 			)}
 		</div>

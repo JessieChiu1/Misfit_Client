@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     }
 })
 
-export default function AboutMisfitBanner() {
+export default function ProblemBanner() {
     const styles = useStyles()
 
     return (
