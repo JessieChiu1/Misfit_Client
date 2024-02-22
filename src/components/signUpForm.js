@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { Text, Input, Button, makeStyles, shorthands } from "@fluentui/react-components"
+import { Text, Input, Button, makeStyles, shorthands, mergeClasses } from "@fluentui/react-components"
 import { useRouter } from "next/router"
 import { AuthContext } from "@/components/providers/AuthProvider"
 import { signup } from "../services/auth-service"
@@ -30,9 +30,24 @@ const useStyles = makeStyles({
     }
 })
 
+const useHoverStyles = makeStyles({
+    hoverTransition: {
+      transitionProperty: 'transform',
+      transitionDuration: "0.25s",
+      transitionTimingFunction: "linear"
+    },
+    hoverEffectSmall: {
+      '&:hover': {
+        transform: 'scale(1.1)',
+      },
+    },
+})
+
+
 export default function SignUpForm() {
     const router = useRouter()
     const styles = useStyles()
+    const hoverStyles = useHoverStyles()
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -117,7 +132,10 @@ export default function SignUpForm() {
                     onChange={handleChangePassword1}
                 />
                 <div className={styles.centerElement}>
-                    <Button className={styles.button} appearance="primary" type="submit">Sign up</Button>
+                    <Button 
+                        className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}appearance="primary" 
+                        type="submit"
+                        >Sign up</Button>
                 </div>
             </form>
         </div>
