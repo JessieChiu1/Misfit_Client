@@ -1,4 +1,5 @@
-import { Image, makeStyles, shorthands, Text, Button } from "@fluentui/react-components"
+import { Image, makeStyles, shorthands, Text, Button, mergeClasses, Link } from "@fluentui/react-components"
+import { useRouter } from "next/router"
 
 const useStyles = makeStyles({
     container: {
@@ -42,6 +43,11 @@ const useHoverStyles = makeStyles({
 export default function IndexHeader() {
     const styles = useStyles()
     const hoverStyles = useHoverStyles()
+    const router = useRouter()
+
+    const handleNavigation = (route) => {
+        router.push(route)
+    }
     
     return (
         <nav className={styles.container}>
@@ -50,13 +56,24 @@ export default function IndexHeader() {
                     src="/logo.png"
                     alt="logo"
                     className={styles.logo}
-                    onClick={() => handleNavigation("/home")}
                 />
-                <Text size={500} weight="semibold">Explore</Text>
+                <Link>
+                    <Text 
+                        size={500} 
+                        weight="semibold"
+                        onClick={() => handleNavigation("/home")}
+                        >Explore</Text>
+                </Link>
             </div>
             <div className={styles.nav}>
-                <Button appearance="primary">Sign up</Button>
-                <Button appearance="primary">Login</Button>
+                <Button 
+                    appearance="primary"
+                    className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
+                    >Sign up</Button>
+                <Button 
+                    appearance="primary"
+                    className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
+                    >Login</Button>
             </div>
         </nav>
     )

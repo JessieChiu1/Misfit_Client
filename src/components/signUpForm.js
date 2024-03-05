@@ -55,11 +55,6 @@ export default function SignUpForm() {
 
     const { setToken } = useContext(AuthContext)
 
-
-    const handleNavigation = (route) => {
-        router.push(route)
-    }
-
     const handleChangeUsername = (e) => {
         setUsername(e.target.value)
     }
@@ -84,7 +79,7 @@ export default function SignUpForm() {
                 const response = await signup(payload)
                 if (response.token) {
                     setToken(response.token)
-                    handleNavigation("/")
+                    router.push("/home")
                 } else {
                     setErrorMessage(response.message)
                     console.log(errorMessage)
@@ -133,7 +128,8 @@ export default function SignUpForm() {
                 />
                 <div className={styles.centerElement}>
                     <Button 
-                        className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}appearance="primary" 
+                        className={mergeClasses(hoverStyles.hoverEffectSmall, hoverStyles.hoverTransition)}
+                        appearance="primary" 
                         type="submit"
                         >Sign up</Button>
                 </div>

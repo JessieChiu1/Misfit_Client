@@ -1,10 +1,12 @@
-import { makeStyles, Display } from "@fluentui/react-components"
+import { makeStyles, Title1, shorthands } from "@fluentui/react-components"
 
 const useStyles = makeStyles({
     container: {
         backgroundColor: "#FEEEF1",
         height: "500px",
-        width: "100vw"
+        width: "100vw",
+        ...shorthands.padding("20px"),
+        width: "100%",
     },
     text: {
         color: "#CC526A"
@@ -16,7 +18,7 @@ export default function ProblemBanner() {
 
     return (
         <div className={styles.container}>
-            <Display className={styles.text}>placeholder text</Display>
+            <Title1 className={styles.text}>problem</Title1>
         </div>
     )
 }

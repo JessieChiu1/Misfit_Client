@@ -54,10 +54,6 @@ export default function LoginForm() {
 
     const { setToken } = useContext(AuthContext)
 
-    const handleNavigation = (route) => {
-        router.push(route)
-    }
-
     const handleChangeUsername = (e) => {
         setUsername(e.target.value)
     }
@@ -79,7 +75,7 @@ export default function LoginForm() {
                 console.log(response.token)
                 if (response.token) {
                     setToken(response.token)
-                    handleNavigation("/")
+                    router.push("/home")
                 } else {
                     setErrorMessage(response.message)
                     console.log(errorMessage)

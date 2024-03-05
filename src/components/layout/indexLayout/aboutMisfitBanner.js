@@ -1,10 +1,12 @@
-import { makeStyles, LargeTitle } from "@fluentui/react-components"
+import { makeStyles, Title1, shorthands } from "@fluentui/react-components"
 
 const useStyles = makeStyles({
     container: {
         backgroundColor: "#BAEBFD",
         height: "500px",
-        width: "100vw"
+        width: "100vw",
+        ...shorthands.padding("20px"),
+        width: "100%",
     },
     text: {
         color: "#0AACEA"
@@ -16,7 +18,7 @@ export default function AboutMisfitBanner() {
 
     return (
         <div className={styles.container}>
-            <LargeTitle className={styles.text}>placeholder text</LargeTitle>
+            <Title1 className={styles.text}>about</Title1>
         </div>
     )
 }
