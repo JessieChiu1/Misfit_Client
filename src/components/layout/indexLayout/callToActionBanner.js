@@ -33,7 +33,6 @@ const useStyles = makeStyles({
     },
     fade_in: {
         opacity: "1",
-        backgroundColor: "light pink",
     }
 })
 
@@ -65,7 +64,7 @@ export default function CallToActionBanner() {
     return (
         <div ref={containerRef} className={mergeClasses(styles.container, visible && styles.fade_in)}>
             <div className={styles.text_container}>
-                <Title1 className={styles.text}>Sign up or start exploring to find your perfect fit today!</Title1>
+                <Title1 className={styles.text}>Sign up or start discovering your perfect fit today!</Title1>
                 <Button 
                     size="large" 
                     appearance="primary"
